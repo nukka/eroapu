@@ -6,9 +6,37 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+    background: #ffe8f8;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.page-footer {
+    background: black;
+    color: white;
+    bottom: 0;
+    position:absolute;
+    width: 100%;
+    padding: 100px;
+}
+
+.footer-title {
+    font-size: x-large;
+    padding: 10px;
+}
+
+.portal-content{
+    padding: 20px;
+}
+
+#lomake {
+    padding-right: 20%;
+    padding-left: 20%;
+}
+
+.otsikko {
+    background-color: white;
 }
