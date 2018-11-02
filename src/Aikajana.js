@@ -32,7 +32,7 @@ class Aikajana extends Component {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-                <Jumbotron>
+                <Jumbotron className="otsikko">
                     <h1>Aikajana</h1>
                     <p>
                         Eron vaiheet
@@ -43,12 +43,12 @@ class Aikajana extends Component {
                 <div className="page-footer">
                     <Grid>
                         <p className="footer-title"> Footer </p>
-                    <Row className="show-grid">
-                        <Col md={4} >Tieto1</Col>
-                        <Col md={4} >Tieto2</Col>
-                        <Col md={4} >Tieto3</Col>
-                    </Row>
-                </Grid>
+                        <Row className="show-grid">
+                            <Col md={4}>Tieto1</Col>
+                            <Col md={4}>Tieto2</Col>
+                            <Col md={4}>Tieto3</Col>
+                        </Row>
+                    </Grid>
                 </div>
 
             </div>

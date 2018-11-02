@@ -1,8 +1,37 @@
 import React, {Component} from 'react';
 import './App.css';
-import {Navbar, Nav, NavItem, Jumbotron, Col, Grid, Row} from 'react-bootstrap'
+import {
+    Navbar,
+    Nav,
+    NavItem,
+    Jumbotron,
+    Col,
+    Grid,
+    Row,
+    Form,
+    FormGroup,
+    Button,
+    Radio,
+    ControlLabel,
+    FormControl
+} from 'react-bootstrap'
 
 class Apua extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: '',
+            phonenumber: '',
+            formtext: ''
+        }
+    }
+
+    handleUserInput(e) {
+        const value = e.target.value;
+        console.log("value: " + value);
+    }
+
     render() {
         return (
             <div className="App">
@@ -32,23 +61,40 @@ class Apua extends Component {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-                <Jumbotron>
-                    <h1>Lomake</h1>
+                <Jumbotron className="otsikko">
+                    <h1>Pyydä apua -lomake</h1>
                     <p>
-                        Hae apua
+                        Hae
                     </p>
                 </Jumbotron>
+                <div id="lomake" className="container">
+                    <Form>
+                        <FormGroup controlId="formControlsTextarea">
+                            <ControlLabel>Pyydä apua</ControlLabel>
+                            <FormControl componentClass="textarea"
+                                         placeholder="Kirjoita tähän, millaista apua tarvitset"/>
+                        </FormGroup>
 
+                        <p>Ottakaa minuun yhteyttä...</p>
+                        <Radio>Puhelimitse</Radio>
+                        <FormControl placeholder="Kirjoita puhelinnumero..."/>
+                        <Radio>Sähköpostitse</Radio>
+                        <FormControl onChange={this.handleUserInput} placeholder="Kirjoita sähköposti..."/>
+                        <Button type="submit"> Lähetä </Button>
+
+                    </Form>
+
+                </div>
 
                 <div className="page-footer">
                     <Grid>
                         <p className="footer-title"> Footer </p>
-                    <Row className="show-grid">
-                        <Col md={4} >Tieto1</Col>
-                        <Col md={4} >Tieto2</Col>
-                        <Col md={4} >Tieto3</Col>
-                    </Row>
-                </Grid>
+                        <Row className="show-grid">
+                            <Col md={4}>Tieto1</Col>
+                            <Col md={4}>Tieto2</Col>
+                            <Col md={4}>Tieto3</Col>
+                        </Row>
+                    </Grid>
                 </div>
 
             </div>

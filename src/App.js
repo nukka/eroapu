@@ -32,7 +32,7 @@ class App extends Component {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-                <Jumbotron>
+                <Jumbotron className="otsikko">
                     <h1>Eroapua verkossa</h1>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et
@@ -41,25 +41,25 @@ class App extends Component {
                     </p>
                 </Jumbotron>
                 <div className="portal-content">
-                <Grid>
-                    <Row className="show-grid">
-                        <Col md={3} >Haku</Col>
-                        <Col md={3} >Aikajana</Col>
-                        <Col md={3} >Hätänappi</Col>
-                        <Col md={3} >Kalenteri</Col>
-                    </Row>
-                </Grid>
+                    <Grid>
+                        <Row className="show-grid">
+                            <Col md={3}>Haku</Col>
+                            <Col md={3}>Aikajana</Col>
+                            <Col md={3}>Hätänappi</Col>
+                            <Col md={3}>Kalenteri</Col>
+                        </Row>
+                    </Grid>
                 </div>
 
                 <div className="page-footer">
                     <Grid>
                         <p className="footer-title"> Footer </p>
-                    <Row className="show-grid">
-                        <Col md={4} >Tieto1</Col>
-                        <Col md={4} >Tieto2</Col>
-                        <Col md={4} >Tieto3</Col>
-                    </Row>
-                </Grid>
+                        <Row className="show-grid">
+                            <Col md={4}>Tieto1</Col>
+                            <Col md={4}>Tieto2</Col>
+                            <Col md={4}>Tieto3</Col>
+                        </Row>
+                    </Grid>
                 </div>
 
             </div>

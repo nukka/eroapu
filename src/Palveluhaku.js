@@ -1,37 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
-import {
-    Navbar,
-    Nav,
-    NavItem,
-    Jumbotron,
-    Col,
-    Grid,
-    Row,
-    Form,
-    FormGroup,
-    Button,
-    Radio,
-    ControlLabel,
-    FormControl
-} from 'react-bootstrap'
+import {Navbar, Nav, NavItem, Jumbotron, Col, Grid, Row} from 'react-bootstrap'
 
 class Palveluhaku extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: '',
-            phonenumber: '',
-            formtext: ''
-        }
-    }
-
-    handleUserInput(e) {
-        const value = e.target.value;
-        console.log("value: " + value);
-    }
-
     render() {
         return (
             <div className="App">
@@ -64,27 +35,10 @@ class Palveluhaku extends Component {
                 <Jumbotron className="otsikko">
                     <h1>Palveluhaku</h1>
                     <p>
-                        Hae
+                        alle tulee valintalaatikot
                     </p>
                 </Jumbotron>
-                <div id="lomake" className="container">
-                    <Form>
-                        <FormGroup controlId="formControlsTextarea">
-                            <ControlLabel>Pyydä apua</ControlLabel>
-                            <FormControl componentClass="textarea"
-                                         placeholder="Kirjoita tähän, millaista apua tarvitset"/>
-                        </FormGroup>
 
-                        <p>Ottakaa minuun yhteyttä...</p>
-                        <Radio>Puhelimitse</Radio>
-                        <FormControl placeholder="Kirjoita puhelinnumero..."/>
-                        <Radio>Sähköpostitse</Radio>
-                        <FormControl onChange={this.handleUserInput} placeholder="Kirjoita sähköposti..."/>
-                        <Button type="submit"> Lähetä </Button>
-
-                    </Form>
-
-                </div>
 
                 <div className="page-footer">
                     <Grid>
@@ -98,8 +52,8 @@ class Palveluhaku extends Component {
                 </div>
 
             </div>
-    );
+        );
     }
-    }
+}
 
-    export default Palveluhaku;
+export default Palveluhaku;
