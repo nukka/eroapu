@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import {
+    Alert,
     Navbar,
     Nav,
     NavItem,
@@ -24,13 +25,45 @@ class Apua extends Component {
             radioSelected: 'phone',
             email: '',
             phonenumber: '',
-            formtext: ''
+            formtext: '',
+            showphonewarning: false
         }
     }
 
     handleUserInput(e) {
         const value = e.target.value;
         console.log("value: " + value);
+        if (this.state.radioSelected === 'phone') {
+
+            var reg = /^[0-9+]+$/;
+
+            if (reg.test(value) && value.length < 14) {
+                this.setState({phonenumber: value});
+                this.setState({showphonewarning: false});
+            } else {
+                if (value !== '' || value.length !== 0 ) {
+                    this.setState({showphonewarning: true});
+                } else {
+                    this.setState({showphonewarning: false});
+                }
+            }
+
+        } else {
+
+            //email validaatio
+
+        }
+
+    }
+
+    phoneNumberAlert() {
+
+        if (this.state.showphonewarning === true) {
+            return <Alert bsStyle="danger"> Laita puhelinnumeroon vain numeroita. <br/> Puhelinnumeron pituus voi olla vain maksimissaan 13 merkkiä. </Alert>;
+        } else {
+            return '';
+        }
+
     }
 
     handleRadioClick(e) {
@@ -40,6 +73,7 @@ class Apua extends Component {
     render() {
 
         let contactField = null;
+        let warningTextField = this.phoneNumberAlert();
         const radioSelected = this.state.radioSelected;
         if (radioSelected === 'phone') {
             contactField = <FormControl onChange={(e) => this.handleUserInput(e)} placeholder="Kirjoita puhelinnumero..."/>;
@@ -106,6 +140,8 @@ class Apua extends Component {
 
 
                         {contactField}
+
+                        {warningTextField}
 
                         <FormGroup controlId="formControlsTextarea">
                             <ControlLabel>Miten voimme auttaa? </ControlLabel>
