@@ -22,22 +22,27 @@ class Apua extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            radioSelected: 'phone',
+            radioSelected: '',
             email: '',
             phonenumber: '',
             formtext: '',
-            showphonewarning: false
+            showphonewarning: false,
+            showemailwarning: false,
         }
     }
 
     handleUserInput(e) {
         const value = e.target.value;
         console.log("value: " + value);
+
+        this.setState({showphonewarning: false});
+        this.setState({showemailwarning: false});
+
         if (this.state.radioSelected === 'phone') {
 
-            var reg = /^[0-9+]+$/;
+            var phonereg = /^[0-9+]+$/;
 
-            if (reg.test(value) && value.length < 14) {
+            if (phonereg.test(value) && value.length < 14) {
                 this.setState({phonenumber: value});
                 this.setState({showphonewarning: false});
             } else {
@@ -49,8 +54,18 @@ class Apua extends Component {
             }
 
         } else {
+            var emailreg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-            //email validaatio
+            if (emailreg.test(value)) {
+                this.setState({email: value});
+                this.setState({showemailwarning: false});
+            } else {
+                if (value !== '' || value.length !== 0 ) {
+                    this.setState({showemailwarning: true});
+                } else {
+                    this.setState({showemailwarning: false});
+                }
+            }
 
         }
 
@@ -66,6 +81,16 @@ class Apua extends Component {
 
     }
 
+    emailAlert() {
+
+        if (this.state.showemailwarning === true) {
+            return <Alert bsStyle="danger"> Invalidi sähköposti. </Alert>;
+        } else {
+            return '';
+        }
+
+    }
+
     handleRadioClick(e) {
         this.setState({radioSelected: e});
     }
@@ -73,12 +98,15 @@ class Apua extends Component {
     render() {
 
         let contactField = null;
-        let warningTextField = this.phoneNumberAlert();
+        let phoneWarningTextField = this.phoneNumberAlert();
+        let emailWarningTextField = this.emailAlert();
         const radioSelected = this.state.radioSelected;
         if (radioSelected === 'phone') {
             contactField = <FormControl onChange={(e) => this.handleUserInput(e)} placeholder="Kirjoita puhelinnumero..."/>;
-        } else {
+        } else if (radioSelected === 'email') {
             contactField = <FormControl onChange={(e) => this.handleUserInput(e)} placeholder="Kirjoita sähköposti..."/>;
+        } else {
+            contactField = '';
         }
 
         return (
@@ -138,10 +166,9 @@ class Apua extends Component {
 
                         </Grid>
 
-
                         {contactField}
-
-                        {warningTextField}
+                        {phoneWarningTextField}
+                        {emailWarningTextField}
 
                         <FormGroup controlId="formControlsTextarea">
                             <ControlLabel>Miten voimme auttaa? </ControlLabel>
