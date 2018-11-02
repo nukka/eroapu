@@ -40,7 +40,7 @@ class Palveluhaku extends Component {
                 </Jumbotron>
 
 
-                <div className="page-footer">
+                <footer className="page-footer">
                     <Grid>
                         <p className="footer-title"> Footer </p>
                         <Row className="show-grid">
@@ -49,7 +49,7 @@ class Palveluhaku extends Component {
                             <Col md={4}>Tieto3</Col>
                         </Row>
                     </Grid>
-                </div>
+                </footer>
 
             </div>
         );

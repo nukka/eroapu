@@ -21,6 +21,7 @@ class Apua extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            radioSelected: 'phone',
             email: '',
             phonenumber: '',
             formtext: ''
@@ -32,7 +33,20 @@ class Apua extends Component {
         console.log("value: " + value);
     }
 
+    handleRadioClick(e) {
+        this.setState({radioSelected: e});
+    }
+
     render() {
+
+        let contactField = null;
+        const radioSelected = this.state.radioSelected;
+        if (radioSelected === 'phone') {
+            contactField = <FormControl onChange={(e) => this.handleUserInput(e)} placeholder="Kirjoita puhelinnumero..."/>;
+        } else {
+            contactField = <FormControl onChange={(e) => this.handleUserInput(e)} placeholder="Kirjoita sähköposti..."/>;
+        }
+
         return (
             <div className="App">
                 <Navbar collapseOnSelect>
@@ -68,18 +82,37 @@ class Apua extends Component {
                     </p>
                 </Jumbotron>
                 <div id="lomake" className="container">
+
+                    <p> Jos avuntarpeesi on akuuttia, soita valtakunnalliseen kriisipuhelimeen <b> 010 195 202</b>.
+                        Kriisipuhelin päivystää arkisin klo 9.00– 07.00 sekä viikonloppuisin ja juhlapyhinä klo
+                        15.00–07.00. Pyrimme vastaamaan yhteydenottoon <b>x</b> päivän sisällä. </p>
                     <Form>
+
+                        <Grid>
+                            <Col sm={2} m={2}>
+                                <p>Ottakaa minuun yhteyttä...</p>
+                            </Col>
+
+                            <Col sm={2} md={2}>
+
+                                <Radio name="radioGroup"
+                                       onClick={() => this.handleRadioClick('phone')}>Puhelimitse</Radio>
+                                <Radio name="radioGroup"
+                                       onClick={() => this.handleRadioClick('email')}>Sähköpostitse</Radio>
+
+                            </Col>
+
+                        </Grid>
+
+
+                        {contactField}
+
                         <FormGroup controlId="formControlsTextarea">
-                            <ControlLabel>Pyydä apua</ControlLabel>
+                            <ControlLabel>Miten voimme auttaa? </ControlLabel>
                             <FormControl componentClass="textarea"
                                          placeholder="Kirjoita tähän, millaista apua tarvitset"/>
                         </FormGroup>
 
-                        <p>Ottakaa minuun yhteyttä...</p>
-                        <Radio>Puhelimitse</Radio>
-                        <FormControl placeholder="Kirjoita puhelinnumero..."/>
-                        <Radio>Sähköpostitse</Radio>
-                        <FormControl onChange={this.handleUserInput} placeholder="Kirjoita sähköposti..."/>
                         <Button type="submit"> Lähetä </Button>
 
                     </Form>

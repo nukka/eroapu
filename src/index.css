@@ -9,6 +9,11 @@ body {
     background: #ffe8f8;
 }
 
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -17,11 +22,12 @@ code {
 .page-footer {
     background: black;
     color: white;
+    clear: both;
+    position: relative;
     bottom: 0;
-    position:absolute;
     width: 100%;
-    height: 15%;
-    padding: 100px;
+    padding: 80px;
+    z-index: -10;
 }
 
 .footer-title {
@@ -36,6 +42,7 @@ code {
 #lomake {
     padding-right: 20%;
     padding-left: 20%;
+    padding-bottom: 10px;
 }
 
 .otsikko {
