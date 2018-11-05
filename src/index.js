@@ -5,11 +5,10 @@ import Apua from './Apua';
 import Aikajana from './Aikajana';
 import Palveluhaku from './Palveluhaku';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import {Col, Grid, Jumbotron, Nav, Navbar, NavItem, Row} from "react-bootstrap";
+import {Col, Grid, Nav, Navbar, NavItem, Row} from "react-bootstrap";
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
@@ -44,7 +43,7 @@ function Jana() {
 ReactDOM.render((
     <BrowserRouter>
 
-        <div className="App">
+        <div>
             <Navbar collapseOnSelect>
                 <Navbar.Header>
                     <Navbar.Brand>
@@ -71,16 +70,6 @@ ReactDOM.render((
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
-            <Jumbotron className="otsikko">
-                <h1>Eroapua verkossa</h1>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquid ex ea commodi consequat.
-                </p>
-            </Jumbotron>
-
-
             <Switch>
                 <Route exact path="/" component={Etusivu}/>
                 <Route path="/haku" component={Haku}/>
