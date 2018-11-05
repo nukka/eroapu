@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
+import {FormGroup, ControlLabel, FormControl, Button, Glyphicon} from 'react-bootstrap';
 import './App.css';
 import {Col, Grid, Row} from 'react-bootstrap'
 
@@ -10,22 +10,47 @@ class App extends Component {
 
                 <div className="portal-content">
                     <Grid>
+                        <div className="show-grid with-margin">
+                            <Row>
+                                <Col md={4}>
+                                </Col>
+                                <Col md={4}>
+                                    <Hakupalkki/>
+                                </Col>
+                                <Col md={4}>
+                                </Col>
+                            </Row>
+                        </div>
+
                         <Row>
-                            <Col md={4}>
+                            <Col md={3}>
+                                <Button bsSize="large" href="/haku">
+                                    <Glyphicon glyph="glyphicon glyphicon-search"/> Haku
+                                </Button>
                             </Col>
-                            <Col md={4}>
-                                <Hakupalkki/>
+                            <Col md={3}>
+                                <Button bsSize="large" href="/aikajana">
+                                    <Glyphicon glyph="glyphicon glyphicon-minus"/> Aikajana
+                                </Button>
                             </Col>
-                            <Col md={4}>
+                            <Col md={3}>
+                                <Button bsSize="large" href="/apua">
+                                    <Glyphicon glyph="glyphicon glyphicon-exclamation-sign"/> Hätänappi
+                                </Button>
+                            </Col>
+                            <Col md={3}>
+                                <Button bsSize="large">
+                                    <Glyphicon glyph="glyphicon glyphicon-calendar"/> Kalenteri
+                                </Button>
                             </Col>
                         </Row>
-                        <Row className="show-grid">
-                            <Col md={3}>Haku</Col>
-                            <Col md={3}>Aikajana</Col>
-                            <Col md={3}>Hätänappi</Col>
-                            <Col md={3}>Kalenteri</Col>
-                        </Row>
+
+
                     </Grid>
+                    <Grid>
+
+                    </Grid>
+
                 </div>
 
             </div>

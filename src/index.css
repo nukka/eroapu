@@ -48,3 +48,7 @@ code {
 .otsikko {
     background-color: white;
 }
+
+.with-margin{
+    height: 150px;
+}
