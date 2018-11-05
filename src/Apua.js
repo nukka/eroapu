@@ -2,13 +2,8 @@ import React, {Component} from 'react';
 import './App.css';
 import {
     Alert,
-    Navbar,
-    Nav,
-    NavItem,
-    Jumbotron,
     Col,
     Grid,
-    Row,
     Form,
     FormGroup,
     Button,
@@ -110,39 +105,6 @@ class Apua extends Component {
         }
 
         return (
-            <div className="App">
-                <Navbar collapseOnSelect>
-                    <Navbar.Header>
-                        <Navbar.Brand>
-                            <a href="/">Eroapua</a>
-                        </Navbar.Brand>
-                        <Navbar.Toggle/>
-                    </Navbar.Header>
-                    <Navbar.Collapse>
-                        <Nav>
-                            <NavItem eventKey={1} href="/aikajana">
-                                Aikajana
-                            </NavItem>
-                            <NavItem eventKey={2} href="/apua">
-                                Pyydä apua
-                            </NavItem>
-                            <NavItem eventKey={3} href="/haku">
-                                Palveluhaku
-                            </NavItem>
-                        </Nav>
-                        <Nav pullRight>
-                            <NavItem eventKey={4} href="#">
-                                Yhteystiedot
-                            </NavItem>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Navbar>
-                <Jumbotron className="otsikko">
-                    <h1>Pyydä apua -lomake</h1>
-                    <p>
-                        Hae
-                    </p>
-                </Jumbotron>
                 <div id="lomake" className="container">
 
                     <p> Jos avuntarpeesi on akuuttia, soita valtakunnalliseen kriisipuhelimeen <b> 010 195 202</b>.
@@ -179,21 +141,7 @@ class Apua extends Component {
                         <Button type="submit"> Lähetä </Button>
 
                     </Form>
-
                 </div>
-
-                <div className="page-footer">
-                    <Grid>
-                        <p className="footer-title"> Footer </p>
-                        <Row className="show-grid">
-                            <Col md={4}>Tieto1</Col>
-                            <Col md={4}>Tieto2</Col>
-                            <Col md={4}>Tieto3</Col>
-                        </Row>
-                    </Grid>
-                </div>
-
-            </div>
         );
     }
 }
