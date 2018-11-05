@@ -8,7 +8,9 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import {Col, Grid, Nav, Navbar, NavItem, Row} from "react-bootstrap";
+import {
+    Col, Grid, Nav, Navbar, NavItem, Row, Image
+} from "react-bootstrap";
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
@@ -79,11 +81,32 @@ ReactDOM.render((
 
             <div className="page-footer">
                 <Grid>
-                    <p className="footer-title"> Footer </p>
                     <Row className="show-grid">
-                        <Col md={4}>Tieto1</Col>
-                        <Col md={4}>Tieto2</Col>
-                        <Col md={4}>Tieto3</Col>
+                        <Col md={3}>
+
+                            <p className="footer-title"> Eroportaali </p>
+                            Eroportaalista löydät tiedon koottuna. Lorem ipsum dolor sit amet, no dicit maiorum
+                            appetere est, pro te hinc quas verear. Petentium elaboraret pro ne. Ludus nostrum fastidii
+                            usu cu, mel stet forensibus ut, has id imperdiet intellegebat. Et officiis laboramus sed,
+                            vis ne case reque liberavisse, summo partiendo facilisis sed no.
+
+                        </Col>
+                        <Col md={6} className="footer-middle">
+                            <p className="footer-title"> Linkkejä </p>
+
+                            <div className="url-list">
+                                <ul><a href="https://apuaeroon.fi/"> apuaeroon.fi </a></ul>
+                                <ul><a href="https://perheaikaa.fi/"> perheaikaa.fi </a></ul>
+                                <ul><a href="https://suomenkasper.fi"> suomenkasper.fi </a></ul>
+                                <ul><a href="https://lapsuus.ouka.fi/"> lapsuus.ouka.fi </a></ul>
+
+                            </div>
+
+                        </Col>
+
+
+                        <Col md={3}><p className="footer-title"> Ylläpitäjän logo </p> <Image
+                            src="https://bitbucket.org/eroauttaminenverkossa/eroapu/raw/754ce3e30471f9d03f02f40bb301990dcd83dec0/src/Logo.png"/></Col>
                     </Row>
                 </Grid>
             </div>

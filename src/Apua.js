@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {
     Alert,
-    Row,
-    Grid,
     Form,
     FormGroup,
     Button,
@@ -29,7 +27,6 @@ class Apua extends Component {
 
     handleUserInput(e) {
         const value = e.target.value;
-        console.log("value: " + value);
 
         this.setState({showphonewarning: false});
         this.setState({showemailwarning: false});
@@ -74,6 +71,10 @@ class Apua extends Component {
 
     }
 
+    handleTextInput(e) {
+        this.setState({formtext: e.target.value});
+    }
+
     phoneNumberAlert() {
 
         if (this.state.showphonewarning === true) {
@@ -107,10 +108,12 @@ class Apua extends Component {
         const radioSelected = this.state.radioSelected;
         if (radioSelected === 'phone') {
             contactField =
-                <FormControl onChange={(e) => this.handleUserInput(e)} placeholder="Kirjoita puhelinnumero..."/>;
+                <FormControl className="form-field" onChange={(e) => this.handleUserInput(e)}
+                             placeholder="Kirjoita puhelinnumero..."/>;
         } else if (radioSelected === 'email') {
             contactField =
-                <FormControl onChange={(e) => this.handleUserInput(e)} placeholder="Kirjoita sähköposti..."/>;
+                <FormControl className="form-field" onChange={(e) => this.handleUserInput(e)}
+                             placeholder="Kirjoita sähköposti..."/>;
         } else {
             contactField = '';
         }
@@ -127,39 +130,34 @@ class Apua extends Component {
 
                 <div id="lomake" className="container">
 
-                    <p className="helptext"> Tarvitsetko neuvoa tai haluatko jutella jonkun kanssa eroon liittyvistä asioista? Ota yhteyttä alla olevan lomakkeen avulla. Jos avuntarpeesi on akuuttia, soita valtakunnalliseen kriisipuhelimeen <b> 010 195 202</b>.
+                    <p className="helptext"> Tarvitsetko neuvoa tai haluatko jutella jonkun kanssa eroon liittyvistä
+                        asioista? Ota yhteyttä alla olevan lomakkeen avulla. Jos avuntarpeesi on akuuttia, soita
+                        valtakunnalliseen kriisipuhelimeen <b> 010 195 202</b>.
                         Kriisipuhelin päivystää arkisin klo 9.00– 07.00 sekä viikonloppuisin ja juhlapyhinä klo
                         15.00–07.00. Pyrimme itse vastaamaan yhteydenottoon 3 päivän sisällä. </p>
 
                     <Form className="form-content">
 
-                        <Grid>
-                            <Row sm={1} m={1}>
-                                <p>Ottakaa minuun yhteyttä...</p>
-                            </Row>
+                        <p>Ottakaa minuun yhteyttä...</p>
+                        <Radio name="radioGroup"
+                               onClick={() => this.handleRadioClick('phone')}>Puhelimitse</Radio>
+                        <Radio className="form-field" name="radioGroup"
+                               onClick={() => this.handleRadioClick('email')}>Sähköpostitse</Radio>
 
-                            <Row sm={2} md={4} className="radioColumn">
-
-                                <Radio name="radioGroup"
-                                       onClick={() => this.handleRadioClick('phone')}>Puhelimitse</Radio>
-                                <Radio name="radioGroup"
-                                       onClick={() => this.handleRadioClick('email')}>Sähköpostitse</Radio>
-
-                            </Row>
-
-                        </Grid>
 
                         {contactField}
                         {phoneWarningTextField}
                         {emailWarningTextField}
 
                         <FormGroup controlId="formControlsTextarea">
-                            <ControlLabel>Miten voimme auttaa? </ControlLabel>
-                            <FormControl componentClass="textarea"
+                            <ControlLabel className="form-field">Miten voimme auttaa? </ControlLabel>
+                            <FormControl className="form-field text-area" componentClass="textarea"
+                                         onChange={(e) => this.handleTextInput(e)}
                                          placeholder="Kirjoita tähän, millaista apua tarvitset"/>
                         </FormGroup>
 
-                        <Button type="submit" disabled={this.state.disableButton} className="btn default"> Lähetä </Button>
+                        <Button onClick={() => console.log(this.state)} type="submit"
+                                disabled={this.state.disableButton} className="btn default"> Lähetä </Button>
 
                     </Form>
                 </div>
