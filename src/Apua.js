@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
-import './App.css';
 import {
     Alert,
-    Col,
+    Row,
     Grid,
     Form,
     FormGroup,
     Button,
     Radio,
     ControlLabel,
-    FormControl
+    FormControl,
+    Jumbotron
 } from 'react-bootstrap'
 
 class Apua extends Component {
@@ -23,6 +23,7 @@ class Apua extends Component {
             formtext: '',
             showphonewarning: false,
             showemailwarning: false,
+            disableButton: true
         }
     }
 
@@ -32,6 +33,7 @@ class Apua extends Component {
 
         this.setState({showphonewarning: false});
         this.setState({showemailwarning: false});
+        this.setState({disableButton: true});
 
         if (this.state.radioSelected === 'phone') {
 
@@ -40,11 +42,14 @@ class Apua extends Component {
             if (phonereg.test(value) && value.length < 14) {
                 this.setState({phonenumber: value});
                 this.setState({showphonewarning: false});
+                this.setState({disableButton: false});
             } else {
-                if (value !== '' || value.length !== 0 ) {
+                if (value !== '' || value.length !== 0) {
                     this.setState({showphonewarning: true});
+                    this.setState({disableButton: true});
                 } else {
                     this.setState({showphonewarning: false});
+                    this.setState({disableButton: false});
                 }
             }
 
@@ -54,11 +59,14 @@ class Apua extends Component {
             if (emailreg.test(value)) {
                 this.setState({email: value});
                 this.setState({showemailwarning: false});
+                this.setState({disableButton: false});
             } else {
-                if (value !== '' || value.length !== 0 ) {
+                if (value !== '' || value.length !== 0) {
                     this.setState({showemailwarning: true});
+                    this.setState({disableButton: true});
                 } else {
                     this.setState({showemailwarning: false});
+                    this.setState({disableButton: false});
                 }
             }
 
@@ -69,7 +77,8 @@ class Apua extends Component {
     phoneNumberAlert() {
 
         if (this.state.showphonewarning === true) {
-            return <Alert bsStyle="danger"> Laita puhelinnumeroon vain numeroita. <br/> Puhelinnumeron pituus voi olla vain maksimissaan 13 merkkiä. </Alert>;
+            return <Alert bsStyle="danger"> Laita puhelinnumeroon vain numeroita. <br/> Puhelinnumeron pituus voi olla
+                vain maksimissaan 13 merkkiä. </Alert>;
         } else {
             return '';
         }
@@ -97,34 +106,46 @@ class Apua extends Component {
         let emailWarningTextField = this.emailAlert();
         const radioSelected = this.state.radioSelected;
         if (radioSelected === 'phone') {
-            contactField = <FormControl onChange={(e) => this.handleUserInput(e)} placeholder="Kirjoita puhelinnumero..."/>;
+            contactField =
+                <FormControl onChange={(e) => this.handleUserInput(e)} placeholder="Kirjoita puhelinnumero..."/>;
         } else if (radioSelected === 'email') {
-            contactField = <FormControl onChange={(e) => this.handleUserInput(e)} placeholder="Kirjoita sähköposti..."/>;
+            contactField =
+                <FormControl onChange={(e) => this.handleUserInput(e)} placeholder="Kirjoita sähköposti..."/>;
         } else {
             contactField = '';
         }
 
         return (
+
+            <div>
+
+                <Jumbotron className="otsikko">
+                    <h1>Pyydä apua</h1>
+                    <div className="helptext" sm={1} md={4}>
+                    </div>
+                </Jumbotron>
+
                 <div id="lomake" className="container">
 
-                    <p> Jos avuntarpeesi on akuuttia, soita valtakunnalliseen kriisipuhelimeen <b> 010 195 202</b>.
+                    <p className="helptext"> Tarvitsetko neuvoa tai haluatko jutella jonkun kanssa eroon liittyvistä asioista? Ota yhteyttä alla olevan lomakkeen avulla. Jos avuntarpeesi on akuuttia, soita valtakunnalliseen kriisipuhelimeen <b> 010 195 202</b>.
                         Kriisipuhelin päivystää arkisin klo 9.00– 07.00 sekä viikonloppuisin ja juhlapyhinä klo
-                        15.00–07.00. Pyrimme vastaamaan yhteydenottoon <b>x</b> päivän sisällä. </p>
-                    <Form>
+                        15.00–07.00. Pyrimme itse vastaamaan yhteydenottoon 3 päivän sisällä. </p>
+
+                    <Form className="form-content">
 
                         <Grid>
-                            <Col sm={2} m={2}>
+                            <Row sm={1} m={1}>
                                 <p>Ottakaa minuun yhteyttä...</p>
-                            </Col>
+                            </Row>
 
-                            <Col sm={2} md={2}>
+                            <Row sm={2} md={4} className="radioColumn">
 
                                 <Radio name="radioGroup"
                                        onClick={() => this.handleRadioClick('phone')}>Puhelimitse</Radio>
                                 <Radio name="radioGroup"
                                        onClick={() => this.handleRadioClick('email')}>Sähköpostitse</Radio>
 
-                            </Col>
+                            </Row>
 
                         </Grid>
 
@@ -138,10 +159,14 @@ class Apua extends Component {
                                          placeholder="Kirjoita tähän, millaista apua tarvitset"/>
                         </FormGroup>
 
-                        <Button type="submit"> Lähetä </Button>
+                        <Button type="submit" disabled={this.state.disableButton} className="btn default"> Lähetä </Button>
 
                     </Form>
                 </div>
+
+            </div>
+
+
         );
     }
 }

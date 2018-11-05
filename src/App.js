@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
-import {FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
-import './App.css';
 import {Col, Grid, Row} from 'react-bootstrap'
+import {FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
 
 class App extends Component {
     render() {
         return (
-            <div className="App">
-
+            <div>
                 <div className="portal-content">
                     <Grid>
                         <Row>
