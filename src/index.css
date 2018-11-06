@@ -22,12 +22,15 @@ ul {
     padding: 0;
 }
 
+.page-content {
+    height: auto;
+}
 
 .page-footer {
     background: black;
     color: white;
     clear: both;
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
     height: auto;
@@ -54,6 +57,7 @@ ul {
 #lomake {
     padding-right: 15%;
     padding-left: 15%;
+    padding-bottom: 20px;
 }
 
 .otsikko {
@@ -82,4 +86,8 @@ ul {
 
 .url-list {
     padding-left: 10px;
+}
+
+.timeline {
+    background-color: #e5e5e5;
 }

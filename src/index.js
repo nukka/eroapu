@@ -72,13 +72,15 @@ ReactDOM.render((
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
-            <Switch>
-                <Route exact path="/" component={Etusivu}/>
-                <Route path="/haku" component={Haku}/>
-                <Route path="/apua" component={Hätänappi}/>
-                <Route path="/aikajana" component={Jana}/>
-            </Switch>
 
+            <div className="page-content">
+                <Switch>
+                    <Route exact path="/" component={Etusivu}/>
+                    <Route path="/haku" component={Haku}/>
+                    <Route path="/apua" component={Hätänappi}/>
+                    <Route path="/aikajana" component={Jana}/>
+                </Switch>
+            </div>
             <div className="page-footer">
                 <Grid>
                     <Row className="show-grid">

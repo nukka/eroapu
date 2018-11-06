@@ -120,7 +120,7 @@ class Apua extends Component {
 
         return (
 
-            <div>
+            <div className="page-content">
 
                 <Jumbotron className="otsikko">
                     <h1>Pyydä apua</h1>
@@ -161,10 +161,7 @@ class Apua extends Component {
 
                     </Form>
                 </div>
-
             </div>
-
-
         );
     }
 }
