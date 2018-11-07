@@ -93,25 +93,30 @@ ul {
 }
 
 .vertical-timeline::before {
-    background: #e5e5e5;
+    background: #d8d8d8;
 }
 
 .vertical-timeline-element-icon {
-    box-shadow: 0 0 0 4px #cecece, inset 0 2px 0 rgba(0, 0, 0, .08), 0 3px 0 4px rgba(0, 0, 0, .05);
+    box-shadow: 0 0 0 4px #cbcbcb, inset 0 2px 0 rgba(0, 0, 0, .08), 0 3px 0 4px rgba(0, 0, 0, .05);
 }
 
 .vertical-timeline-element-content {
-    background: #e5e5e5;
+    background: #d8d8d8;
 }
 
 .vertical-timeline-element-content::before {
-    border-right: 7px solid #e5e5e5;
+    border-right: 7px solid #d8d8d8;
     border-left-color: transparent;
 }
 
 @media only screen and (min-width: 1170px) {
     .vertical-timeline--two-columns .vertical-timeline-element-content::before {
-        border-left-color: #e5e5e5;
+        border-left-color: #d8d8d8;
+    }
+
+    .vertical-timeline--two-columns .vertical-timeline-element:nth-child(even):not(.vertical-timeline-element--left) .vertical-timeline-element-content::before,
+    .vertical-timeline--two-columns .vertical-timeline-element.vertical-timeline-element--right .vertical-timeline-element-content::before {
+        border-right-color: #d8d8d8;
     }
 }
 
