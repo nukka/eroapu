@@ -57,7 +57,7 @@ ul {
 #lomake {
     padding-right: 15%;
     padding-left: 15%;
-    padding-bottom: 20px;
+    padding-bottom: 100px;
 }
 
 .otsikko {
@@ -113,4 +113,12 @@ ul {
     .vertical-timeline--two-columns .vertical-timeline-element-content::before {
         border-left-color: #e5e5e5;
     }
+}
+
+.search-content {
+    padding-bottom: 100px;
+}
+
+.front-page {
+    padding-bottom: 35%;
 }

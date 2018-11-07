@@ -20,8 +20,7 @@ class CheckboxGroup extends Component {
 
     render() {
         return (
-            <div className="page-content">
-
+            <div className="page-content search-content">
                 <Jumbotron className="otsikko">
                     <h1>Palveluhaku</h1>
                     <div className="helptext"> Rastita haluamasi vaihtoehdot ja paina "hae" -näppäintä.

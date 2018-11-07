@@ -5,7 +5,7 @@ import {FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
 class App extends Component {
     render() {
         return (
-            <div>
+            <div className="page-content front-page">
                 <div className="portal-content">
                     <Grid>
                         <Row>
