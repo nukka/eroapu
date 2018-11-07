@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Checkbox, Grid, Row, Col, Button} from 'react-bootstrap';
+import {Checkbox, Grid, Row, Col, Jumbotron} from 'react-bootstrap';
 
 class Palveluhaku extends Component {
     render() {
@@ -20,88 +20,72 @@ class CheckboxGroup extends Component {
 
     render() {
         return (
-            <Grid>
-                <Row className="show-grid">
-                    <Col md={2}>
-                        <p>Kohderyhmä</p>
-                    </Col>
-                    <Col md={2}>
-                        <p>Palvelu</p>
-                    </Col>
-                </Row>
-                <Row className="show-grid">
-                    <Col md={2}>
-                        <Checkbox checked={this.state.checkboxChecked} onChange={this.handleChange}>Aikuinen</Checkbox>
-                    </Col>
-                    <Col md={2}>
-                        <Checkbox>Kirja- ja opasvinkit</Checkbox>
-                    </Col>
-                </Row>
-                <Row className="show-grid">
-                    <Col md={2}>
-                        <Checkbox>Lapsi</Checkbox>
-                    </Col>
-                    <Col md={2}>
-                        <Checkbox>Yleinen informaatio</Checkbox>
-                    </Col>
-                </Row>
-                <Row className="show-grid">
-                    <Col md={2}>
-                        <Checkbox>Asiantuntija</Checkbox>
-                    </Col>
-                    <Col md={2}>
-                        <Checkbox>Ajankohtainen informaatio/uutiset</Checkbox>
-                    </Col>
-                </Row>
-                <Row className="show-grid">
-                    <Col md={2}>
-                    </Col>
-                    <Col md={2}>
-                        <Checkbox>Chat</Checkbox>
-                    </Col>
-                </Row>
-                <Row className="show-grid">
-                    <Col md={2}>
-                    </Col>
-                    <Col md={2}>
-                        <Checkbox>Keskustelupalsta</Checkbox>
-                    </Col>
-                </Row>
-                <Row className="show-grid">
-                    <Col md={2}>
-                    </Col>
-                    <Col md={2}>
-                        <Checkbox>Blogi</Checkbox>
-                    </Col>
-                </Row>
-                <Row className="show-grid">
-                    <Col md={2}>
-                    </Col>
-                    <Col md={2}>
-                        <Checkbox>Tukipuhelin</Checkbox>
-                    </Col>
-                </Row>
-                <Row className="show-grid">
-                    <Col md={2}>
-                    </Col>
-                    <Col md={2}>
-                        <Checkbox>Omakohtaiset tarinat</Checkbox>
-                    </Col>
-                </Row>
-                <Row className="show-grid">
-                    <Col md={2}>
-                    </Col>
-                    <Col md={2}>
-                        <Checkbox>Pelit</Checkbox>
-                    </Col>
-                </Row>
-                <Row className="show-grid">
-                    <Col md={2}>
-                        <Button>Hae</Button>
-                    </Col>
+            <div>
+                <Jumbotron className="otsikko">
+                    <h1>Palveluhaku</h1>
+                    <div className="helptext" sm={1} md={4}>
+                    </div>
+                </Jumbotron>
+                <Grid>
+                    <Row className="show-grid">
+                        <Col md={2} xsOffset={2}>
+                        </Col>
+                        <Col md={2}>
+                            <p>Kohderyhmä</p>
+                            <Row>
+                                <Checkbox>Aikuinen</Checkbox>
+                            </Row>
+                            <Row>
+                                <Checkbox>Lapsi</Checkbox>
+                            </Row>
+                            <Row>
+                                <Checkbox>Asiantuntija</Checkbox>
+                            </Row>
 
-                </Row>
-            </Grid>
+                        </Col>
+                        <Col md={2}>
+                            <p>Palvelu</p>
+                            <Row>
+                                <Checkbox>Kirja- ja opasvinkit</Checkbox>
+                            </Row>
+                            <Row>
+                                <Checkbox>Yleinen informaatio</Checkbox>
+                            </Row>
+                            <Row>
+                                <Checkbox>Ajankohtainen informaatio</Checkbox>
+                            </Row>
+                            <Row>
+                                <Checkbox>Chat</Checkbox>
+                            </Row>
+                            <Row>
+                                <Checkbox>Keskustelupalsta</Checkbox>
+                            </Row>
+                            <Row>
+                                <Checkbox>Blogi</Checkbox>
+                            </Row>
+                            <Row>
+                                <Checkbox>Videot</Checkbox>
+                            </Row>
+                            <Row>
+                                <Checkbox>Tukipuhelin</Checkbox>
+                            </Row>
+                            <Row>
+                                <Checkbox>Omakohtaiset tarinat</Checkbox>
+                            </Row>
+                            <Row>
+                                <Checkbox>Pelit</Checkbox>
+                            </Row>
+                            <Row>
+                                <input type="checkbox" defaultChecked={true}/>
+                            </Row>
+
+                        </Col>
+
+
+                    </Row>
+
+                </Grid>
+            </div>
         );
     }
 
