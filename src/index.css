@@ -46,8 +46,8 @@ ul {
 
 .footer-middle {
     padding-left: 15%;
-    margin-left:auto;
-    margin-right:auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .portal-content {
@@ -89,5 +89,28 @@ ul {
 }
 
 .timeline {
-    background-color: #e5e5e5;
+    background-color: white;
+}
+
+.vertical-timeline::before {
+    background: #e5e5e5;
+}
+
+.vertical-timeline-element-icon {
+    box-shadow: 0 0 0 4px #cecece, inset 0 2px 0 rgba(0, 0, 0, .08), 0 3px 0 4px rgba(0, 0, 0, .05);
+}
+
+.vertical-timeline-element-content {
+    background: #e5e5e5;
+}
+
+.vertical-timeline-element-content::before {
+    border-right: 7px solid #e5e5e5;
+    border-left-color: transparent;
+}
+
+@media only screen and (min-width: 1170px) {
+    .vertical-timeline--two-columns .vertical-timeline-element-content::before {
+        border-left-color: #e5e5e5;
+    }
 }
