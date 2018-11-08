@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Checkbox, Grid, Row, Col, Jumbotron} from 'react-bootstrap';
+import {Grid, Row, Col, Jumbotron} from 'react-bootstrap';
 
 class Palveluhaku extends Component {
     render() {
@@ -23,7 +23,7 @@ class CheckboxGroup extends Component {
             <div>
                 <Jumbotron className="otsikko">
                     <h1>Palveluhaku</h1>
-                    <div className="helptext" sm={1} md={4}>
+                    <div className="helptext">
                     </div>
                 </Jumbotron>
                 <Grid>
@@ -33,50 +33,47 @@ class CheckboxGroup extends Component {
                         <Col md={2}>
                             <p>Kohderyhmä</p>
                             <Row>
-                                <Checkbox>Aikuinen</Checkbox>
+                                <input type="checkbox"/> Aikuinen
                             </Row>
                             <Row>
-                                <Checkbox>Lapsi</Checkbox>
+                                <input type="checkbox"/> Lapsi
                             </Row>
                             <Row>
-                                <Checkbox>Asiantuntija</Checkbox>
+                                <input type="checkbox"/> Asiantuntija
                             </Row>
 
                         </Col>
                         <Col md={2}>
                             <p>Palvelu</p>
                             <Row>
-                                <Checkbox>Kirja- ja opasvinkit</Checkbox>
+                                <input type="checkbox"/> Kirja- ja opasvinkit
                             </Row>
                             <Row>
-                                <Checkbox>Yleinen informaatio</Checkbox>
+                                <input type="checkbox"/> Yleinen informaatio
                             </Row>
                             <Row>
-                                <Checkbox>Ajankohtainen informaatio</Checkbox>
+                                <input type="checkbox"/> Ajankohtainen informaatio
                             </Row>
                             <Row>
-                                <Checkbox>Chat</Checkbox>
+                                <input type="checkbox"/> Chat
                             </Row>
                             <Row>
-                                <Checkbox>Keskustelupalsta</Checkbox>
+                                <input type="checkbox"/> Keskustelupalsta
                             </Row>
                             <Row>
-                                <Checkbox>Blogi</Checkbox>
+                                <input type="checkbox"/> Blogi
                             </Row>
                             <Row>
-                                <Checkbox>Videot</Checkbox>
+                                <input type="checkbox"/> Videot
                             </Row>
                             <Row>
-                                <Checkbox>Tukipuhelin</Checkbox>
+                                <input type="checkbox"/> Tukipuhelin
                             </Row>
                             <Row>
-                                <Checkbox>Omakohtaiset tarinat</Checkbox>
+                                <input type="checkbox"/> Omakohtaiset tarinat
                             </Row>
                             <Row>
-                                <Checkbox>Pelit</Checkbox>
-                            </Row>
-                            <Row>
-                                <input type="checkbox" defaultChecked={true}/>
+                                <input type="checkbox"/> Pelit
                             </Row>
 
                         </Col>
