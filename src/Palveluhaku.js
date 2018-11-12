@@ -20,7 +20,7 @@ class CheckboxGroup extends Component {
 
     render() {
         return (
-            <div>
+            <div className="page-content">
                 <Jumbotron className="otsikko">
                     <h1>Palveluhaku</h1>
                     <div className="helptext">

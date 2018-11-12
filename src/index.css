@@ -24,6 +24,7 @@ ul {
 
 .page-content {
     height: auto;
+    padding-bottom: 20px;
 }
 
 .page-footer {
@@ -44,10 +45,13 @@ ul {
     padding-top: 50px;
 }
 
-.footer-middle {
-    padding-left: 15%;
-    margin-left: auto;
-    margin-right: auto;
+@media only screen and (min-width: 1170px) {
+
+    .footer-middle {
+        padding-left: 15%;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 .portal-content {
