@@ -8,7 +8,7 @@ class Aikajana extends Component {
     constructor(props) {
         super(props);
         this.state = {testarray: []};
-        fetch('http://localhost:3001/test')
+        fetch('http://localhost:3001/api/aikajana')
             .then(response => response.json())
             .then(testarray => (this.setState({testarray})))
     }
