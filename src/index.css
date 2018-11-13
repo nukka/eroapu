@@ -131,3 +131,7 @@ ul {
 .front-page {
     padding-bottom: 35%;
 }
+
+.dropdown-button {
+    width: 300px;
+}

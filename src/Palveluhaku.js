@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Col, Jumbotron} from 'react-bootstrap';
+import {Col, Jumbotron, ButtonToolbar, MenuItem, Row, SplitButton} from 'react-bootstrap';
 
 const palvelut = [ //nämä tiedot otetaan myöhemmin tekstitiedostosta/tietokannasta
     'Kirja- ja opasvinkit',
@@ -65,21 +65,27 @@ class Palveluhaku extends Component {
                     <div className="helptext">
                     </div>
                 </Jumbotron>
-                <Col md={2} xsOffset={2}/>
-                <Col md={2}>
-                    <p className="helptext">Palvelu</p>
-                    <form onSubmit={this.handleFormSubmit}>
-                        {this.createCheckboxes()}
-                        <button className="btn btn-default" type="submit">Hae</button>
-                    </form>
-                </Col>
-                <Col md={2}>
-                    <p className="helptext">Kohderyhmä</p>
-                    <form onSubmit={this.handleFormSubmit}>
-                        {this.createCheckboxes2()}
-                    </form>
-                </Col>
-
+                <Row className="show-grid">
+                    <Col md={2} xsOffset={2}/>
+                    <Col md={2}>
+                        <p className="helptext">Palvelu</p>
+                        <form onSubmit={this.handleFormSubmit}>
+                            {this.createCheckboxes()}
+                            <button className="btn btn-default" type="submit">Hae</button>
+                        </form>
+                    </Col>
+                    <Col md={2}>
+                        <p className="helptext">Kohderyhmä</p>
+                        <form onSubmit={this.handleFormSubmit}>
+                            {this.createCheckboxes2()}
+                        </form>
+                    </Col>
+                </Row>
+                <Row className="show-grid">
+                    <Col md={2} xsOffset={4}>
+                        {/* <DropdownGroup/> nappia painettaessa ilmestyy pudotusvalikot */}
+                    </Col>
+                </Row>
 
             </div>
         );
@@ -123,5 +129,31 @@ class CheckboxGroup extends Component { //The code of this class is from http://
 
 
 }
+
+class DropdownGroup extends Component {
+    render() {
+        return (
+            <div className="container">
+                <ButtonToolbar>
+                    <SplitButton className="dropdown-button" bsSize="large" title="Tukipuhelin" id="dropdown-btn">
+                        <MenuItem className="dropdown-button" eventKey="1">Väestöliitto</MenuItem>
+                        <MenuItem eventKey="1">Eriparivanhemmat</MenuItem>
+                        <MenuItem eventKey="1">Mannerheimin Lastensuojeluliitto</MenuItem>
+                    </SplitButton>
+                </ButtonToolbar>
+
+                <ButtonToolbar>
+                    <SplitButton className="dropdown-button" bsSize="large" title="Chat" id="dropdown-btn">
+                        <MenuItem className="dropdown-button" eventKey="1">Väestöliitto</MenuItem>
+                        <MenuItem eventKey="1">Eriparivanhemmat</MenuItem>
+                        <MenuItem eventKey="1">Mannerheimin Lastensuojeluliitto</MenuItem>
+                    </SplitButton>
+                </ButtonToolbar>
+            </div>
+        )
+    }
+
+}
+
 
 export default Palveluhaku;
