@@ -1,5 +1,13 @@
 import React, {Component} from 'react';
-import {Col, Jumbotron, ButtonToolbar, MenuItem, Row, SplitButton} from 'react-bootstrap';
+import {
+    Col,
+    Jumbotron,
+    Row,
+    Table,
+    Button,
+    ButtonGroup,
+    Glyphicon
+} from 'react-bootstrap';
 
 const palvelut = [ //nämä tiedot otetaan myöhemmin tekstitiedostosta/tietokannasta
     'Kirja- ja opasvinkit',
@@ -20,6 +28,24 @@ const kohderyhma = [
 ];
 
 class Palveluhaku extends Component {
+
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+
+        this.state = {
+            isClicked: false,
+        }
+    }
+
+    handleClick() {
+        this.setState({
+            isClicked: true,
+        });
+        console.log("State: " + this.state.isClicked);
+    }
+
+
     componentWillMount = () => { // The functions of this class are borrowed from http://react.tips/checkboxes-in-react/
         this.selectedCheckboxes = new Set();
     };
@@ -71,7 +97,7 @@ class Palveluhaku extends Component {
                         <p className="helptext">Palvelu</p>
                         <form onSubmit={this.handleFormSubmit}>
                             {this.createCheckboxes()}
-                            <button className="btn btn-default" type="submit">Hae</button>
+                            <button className="btn btn-default" type="submit" onClick={this.handleClick}>Hae</button>
                         </form>
                     </Col>
                     <Col md={2}>
@@ -81,11 +107,14 @@ class Palveluhaku extends Component {
                         </form>
                     </Col>
                 </Row>
-                <Row className="show-grid">
-                    <Col md={2} xsOffset={4}>
-                        {/* <DropdownGroup/> nappia painettaessa ilmestyy pudotusvalikot */}
-                    </Col>
-                </Row>
+                <div className="spacer">
+                    <Row className="show-grid">
+                        <Col xsOffset={4}>
+                            {this.state.isClicked ? <DropdownTableButton/> : null}
+                        </Col>
+                    </Row>
+                </div>
+
 
             </div>
         );
@@ -130,29 +159,57 @@ class CheckboxGroup extends Component { //The code of this class is from http://
 
 }
 
-class DropdownGroup extends Component {
-    render() {
-        return (
-            <div className="container">
-                <ButtonToolbar>
-                    <SplitButton className="dropdown-button" bsSize="large" title="Tukipuhelin" id="dropdown-btn">
-                        <MenuItem className="dropdown-button" eventKey="1">Väestöliitto</MenuItem>
-                        <MenuItem eventKey="1">Eriparivanhemmat</MenuItem>
-                        <MenuItem eventKey="1">Mannerheimin Lastensuojeluliitto</MenuItem>
-                    </SplitButton>
-                </ButtonToolbar>
 
-                <ButtonToolbar>
-                    <SplitButton className="dropdown-button" bsSize="large" title="Chat" id="dropdown-btn">
-                        <MenuItem className="dropdown-button" eventKey="1">Väestöliitto</MenuItem>
-                        <MenuItem eventKey="1">Eriparivanhemmat</MenuItem>
-                        <MenuItem eventKey="1">Mannerheimin Lastensuojeluliitto</MenuItem>
-                    </SplitButton>
-                </ButtonToolbar>
-            </div>
-        )
+class DropdownTableButton extends Component {
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+
+        this.state = {
+            isClicked: false,
+        }
     }
 
+    handleClick() {
+        this.setState(({isClicked}) => (
+            {
+                isClicked: !isClicked,
+            }
+        ));
+    }
+
+    render() {
+        return (
+
+            <div className="dropdown-table">
+                <ButtonGroup vertical block>
+                    <Button onClick={this.handleClick} className="dropdown-button">
+                        Tukipuhelin
+                        <Glyphicon className="dropdown-button-glyphicon" glyph="glyphicon glyphicon-chevron-down"/>
+                    </Button>
+                    {this.state.isClicked ? <DropdownTableContent/> : null}
+                </ButtonGroup>
+            </div>)
+    }
+}
+
+class DropdownTableContent extends Component {
+    render() {
+        return (
+
+            <Table striped bordered condensed hover>
+                <tbody>
+                <tr>
+                    <td>Väestöliitto</td>
+                </tr>
+                <tr>
+                    <td>MLL</td>
+                </tr>
+                </tbody>
+            </Table>
+
+        )
+    }
 }
 
 
