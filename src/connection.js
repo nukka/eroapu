@@ -58,8 +58,63 @@ application.get('/api/aikajana/olen_eronnut', function (req, res) {
 
 });
 
+application.get('/api/palveluhaku', function (req, res) {
+
+
+    con.query('CREATE TABLE IF NOT EXISTS palveluhaku (title VARCHAR(255), link VARCHAR(255), source VARCHAR(255), aikuinen BIT, lapsitainuori BIT, asiantuntija BIT,  informationtype VARCHAR(255));', function (error, results) {
+        if (error) throw error;
+    });
+
+    con.query('TRUNCATE TABLE palveluhaku', function (error, results) {
+        if (error) throw error;
+    });
+
+    con.query('LOAD DATA LOCAL INFILE \'csv/ajankohtainen_informaatio.csv\' INTO TABLE palveluhaku FIELDS TERMINATED BY \',\' ENCLOSED BY \'"\' LINES TERMINATED BY \'\\n\' IGNORE 1 ROWS (@dummy, title, link, source, aikuinen, lapsitainuori, asiantuntija, informationtype) SET informationtype = "Ajankohtainen informaatio";', function (error, results) {
+        if (error) throw error;
+    });
+
+    con.query('LOAD DATA LOCAL INFILE \'csv/blogi.csv\' INTO TABLE palveluhaku FIELDS TERMINATED BY \',\' ENCLOSED BY \'"\' LINES TERMINATED BY \'\\n\' IGNORE 1 ROWS (@dummy, title, link, source, aikuinen, lapsitainuori, asiantuntija, informationtype) SET informationtype = "Blogi";', function (error, results) {
+        if (error) throw error;
+    });
+
+    con.query('LOAD DATA LOCAL INFILE \'csv/chat.csv\' INTO TABLE palveluhaku FIELDS TERMINATED BY \',\' ENCLOSED BY \'"\' LINES TERMINATED BY \'\\n\' IGNORE 1 ROWS (@dummy, title, link, source, aikuinen, lapsitainuori, asiantuntija, informationtype) SET informationtype = "Chat";', function (error, results) {
+        if (error) throw error;
+    });
+
+    con.query('LOAD DATA LOCAL INFILE \'csv/keskustelupalsta.csv\' INTO TABLE palveluhaku FIELDS TERMINATED BY \',\' ENCLOSED BY \'"\' LINES TERMINATED BY \'\\n\' IGNORE 1 ROWS (@dummy, title, link, source, aikuinen, lapsitainuori, asiantuntija, informationtype) SET informationtype = "Keskustelupalsta";', function (error, results) {
+        if (error) throw error;
+    });
+
+    con.query('LOAD DATA LOCAL INFILE \'csv/kirja_opas.csv\' INTO TABLE palveluhaku FIELDS TERMINATED BY \',\' ENCLOSED BY \'"\' LINES TERMINATED BY \'\\n\' IGNORE 1 ROWS (@dummy, title, link, source, aikuinen, lapsitainuori, asiantuntija, informationtype) SET informationtype = "Kirja- ja opasvinkit";', function (error, results) {
+        if (error) throw error;
+    });
+
+    con.query('LOAD DATA LOCAL INFILE \'csv/omakohtainen_tarina.csv\' INTO TABLE palveluhaku FIELDS TERMINATED BY \',\' ENCLOSED BY \'"\' LINES TERMINATED BY \'\\n\' IGNORE 1 ROWS (@dummy, title, link, source, aikuinen, lapsitainuori, asiantuntija, informationtype) SET informationtype = "Omakohtaiset tarinat";', function (error, results) {
+        if (error) throw error;
+    });
+
+    con.query('LOAD DATA LOCAL INFILE \'csv/tukipuhelin.csv\' INTO TABLE palveluhaku FIELDS TERMINATED BY \',\' ENCLOSED BY \'"\' LINES TERMINATED BY \'\\n\' IGNORE 1 ROWS (@dummy, title, link, source, aikuinen, lapsitainuori, asiantuntija, informationtype) SET informationtype = "Tukipuhelin";', function (error, results) {
+        if (error) throw error;
+    });
+
+    con.query('LOAD DATA LOCAL INFILE \'csv/video.csv\' INTO TABLE palveluhaku FIELDS TERMINATED BY \',\' ENCLOSED BY \'"\' LINES TERMINATED BY \'\\n\' IGNORE 1 ROWS (@dummy, title, link, source, aikuinen, lapsitainuori, asiantuntija, informationtype) SET informationtype = "Videot";', function (error, results) {
+        if (error) throw error;
+    });
+
+    con.query('LOAD DATA LOCAL INFILE \'csv/yleinen_informaatio.csv\' INTO TABLE palveluhaku FIELDS TERMINATED BY \',\' ENCLOSED BY \'"\' LINES TERMINATED BY \'\\n\' IGNORE 1 ROWS (@dummy, title, link, source, aikuinen, lapsitainuori, asiantuntija, informationtype) SET informationtype = "Yleistä informaatiota";', function (error, results) {
+        if (error) throw error;
+    });
+
+    con.query('SELECT * FROM mysql.palveluhaku;', function (error, results) {
+        if (error) throw error;
+        res.send(results)
+    });
+
+});
+
 
 application.listen(3001, () => {
-    console.log('Go to http://localhost:3001/api/aikajana/harkitsen_eroa');
-    console.log('Go to http://localhost:3001/api/aikajana/olen_eronnut');
+    console.log('http://localhost:3001/api/aikajana/harkitsen_eroa');
+    console.log('http://localhost:3001/api/aikajana/olen_eronnut');
+    console.log('http://localhost:3001/api/palveluhaku');
 });

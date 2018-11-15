@@ -35,7 +35,13 @@ class Palveluhaku extends Component {
 
         this.state = {
             isClicked: false,
+            results: []
         }
+
+        fetch('http://localhost:3001/api/palveluhaku')
+            .then(response => response.json())
+            .then(results => (this.setState({results})));
+
     }
 
     handleClick() {
@@ -84,6 +90,16 @@ class Palveluhaku extends Component {
 
 
     render() {
+
+        let searchResultsTest = this.state.results.map(function (item) {
+            return (
+                    <p align="center">
+                        {item.informationtype}: {item.title} <a href={item.link}> <br/> {item.source} </a>
+
+                    </p>
+            );
+        });
+
         return (
             <div className="container">
                 <Jumbotron className="otsikko">
@@ -114,6 +130,8 @@ class Palveluhaku extends Component {
                         </Col>
                     </Row>
                 </div>
+
+                {searchResultsTest}
 
 
             </div>
