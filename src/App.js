@@ -1,22 +1,27 @@
 import React, {Component} from 'react';
-import {Col, Grid, Row} from 'react-bootstrap'
+import {Col, Grid, Jumbotron, Row} from 'react-bootstrap'
 import {FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
 
 class App extends Component {
     render() {
         return (
             <div className="page-content front-page">
-                <div className="portal-content">
-                    <Grid>
+                <Jumbotron className="otsikko-portaali">
+                    <div className="portal-and-search">
+                        <h1>Portaali</h1>
+                        <div className="helptext">
+                            <p>Hae eroon liittyvää tietoa vapaalla hakusanalla tai käyttämällä tarkempaa hakua</p>
+                        </div>
                         <Row>
-                            <Col md={4}>
-                            </Col>
-                            <Col md={4}>
+                            <Col md={2}>
                                 <Hakupalkki/>
                             </Col>
-                            <Col md={4}>
-                            </Col>
                         </Row>
+                    </div>
+                </Jumbotron>
+                <div className="portal-content">
+                    <Grid>
+
                         <Row className="show-grid">
                             <Col md={3}>Haku</Col>
                             <Col md={3}>Aikajana</Col>

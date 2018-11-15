@@ -70,6 +70,13 @@ ul {
     padding-bottom: 10px;
 }
 
+.otsikko-portaali {
+    background-color: white;
+    text-align: left;
+    padding-bottom: 10px;
+
+}
+
 .helptext {
     font-size: larger;
     letter-spacing: 0.8px;
@@ -148,5 +155,9 @@ ul {
 
 .spacer {
     margin-top: 20px;
+}
+
+.portal-and-search{
+    margin-left: 5%;
 }
 
