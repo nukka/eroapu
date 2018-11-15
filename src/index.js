@@ -4,6 +4,7 @@ import App from './App';
 import Apua from './Apua';
 import Aikajana from './Aikajana';
 import Palveluhaku from './Palveluhaku';
+import Kalenteri from './Kalenteri';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
@@ -42,6 +43,12 @@ function Jana() {
     );
 }
 
+function Tapahtumakalenteri() {
+    return (
+        <Kalenteri/>
+    );
+}
+
 ReactDOM.render((
     <BrowserRouter>
 
@@ -64,6 +71,9 @@ ReactDOM.render((
                         <NavItem eventKey={3} href="/haku">
                             Palveluhaku
                         </NavItem>
+                        <NavItem eventKey={3} href="/kalenteri">
+                            Tapahtumakalenteri
+                        </NavItem>
                     </Nav>
                     <Nav pullRight>
                         <NavItem eventKey={4} href="#">
@@ -79,6 +89,7 @@ ReactDOM.render((
                     <Route path="/haku" component={Haku}/>
                     <Route path="/apua" component={Hätänappi}/>
                     <Route path="/aikajana" component={Jana}/>
+                    <Route path="/kalenteri" component={Tapahtumakalenteri}/>
                 </Switch>
             </div>
             <div className="page-footer">
