@@ -71,9 +71,7 @@ ul {
 }
 
 .otsikko-portaali {
-    background-color: white;
-    text-align: left;
-    padding-bottom: 10px;
+    font-size: 60px;
 
 }
 
@@ -157,11 +155,52 @@ ul {
     margin-top: 20px;
 }
 
-.portal-and-search{
+.portal-and-search {
     margin-left: 5%;
 }
 
-
 .calendar {
     padding-bottom: 150px;
+}
+
+.front-page-image {
+    max-width: 60%;
+    max-height: 60%;
+    text-align: center;
+}
+
+.hatanappi {
+    width: 120px;
+    height: 120px;
+    line-height: 7;
+    border-radius: 60px;
+    text-align: center;
+    font-size: 15px;
+    background-color: #f7476a;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+    color: white;
+}
+
+.button-row {
+    width: 70%;
+    padding: 7%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+    font-size: 150%;
+    margin-left: 10%;
+}
+
+.button-haku {
+    background-color: #85a9f2;
+}
+
+.button-aikajana {
+    background-color: #85f186;
+}
+
+.button-kalenteri {
+    background-color: #ac85f0;
 }
