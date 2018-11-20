@@ -5,6 +5,7 @@ import Apua from './Apua';
 import Aikajana from './Aikajana';
 import Palveluhaku from './Palveluhaku';
 import Kalenteri from './Kalenteri';
+import Tulokset from './Tulokset';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
@@ -12,6 +13,7 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {
     Col, Grid, Nav, Navbar, NavItem, Row, Image
 } from "react-bootstrap";
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
@@ -47,6 +49,12 @@ function Tapahtumakalenteri() {
     return (
         <Kalenteri/>
     );
+
+    function Tulokset() {
+        return (
+            <Tulokset/>
+        );
+    }
 }
 
 ReactDOM.render((
@@ -90,6 +98,7 @@ ReactDOM.render((
                     <Route path="/apua" component={Hatanappi}/>
                     <Route path="/aikajana" component={Jana}/>
                     <Route path="/kalenteri" component={Tapahtumakalenteri}/>
+                    <Route path="/tulokset" component={Tulokset}/>
                 </Switch>
             </div>
             <div className="page-footer">
