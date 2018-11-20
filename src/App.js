@@ -56,17 +56,45 @@ class Hakupalkki extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.state = {
-            value: ''
+            value: '',
+            results: [],
         };
+
+        fetch('http://localhost:3001/api/palveluhaku')
+            .then(response => response.json())
+            .then(results => (this.setState({results})));
 
     }
 
     handleChange(e) {
         this.setState({value: e.target.value});
-        //console.log(e.target.value);
+
     }
 
+
+    compareValues() {
+        let input = this.state.value;
+        let inputArray = [];
+        inputArray.push(input.split(" "));
+
+
+        if (input.length >= 3){
+            //jos sanassa on 3 tai enemmän kirjainta lisätään taulukkoon
+        }
+
+        this.state.results.map(function (item) {
+            if (input === item.title.toLowerCase()) {
+
+            }
+            return (null);
+
+        })
+
+    }
+
+
     render() {
+        this.compareValues();
         return (
             <form>
                 <FormGroup controlId="searchBar">
@@ -79,6 +107,8 @@ class Hakupalkki extends Component {
                     />
                 </FormGroup>
             </form>
+
+
         );
     }
 }
