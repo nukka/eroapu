@@ -19,6 +19,7 @@ class Apua extends Component {
             email: '',
             phonenumber: '',
             formtext: '',
+            name: '',
             showphonewarning: false,
             showemailwarning: false,
             disableButton: true
@@ -73,6 +74,13 @@ class Apua extends Component {
 
     handleTextInput(e) {
         this.setState({formtext: e.target.value});
+        console.log("teksti: " + e.target.value);
+    }
+
+    handleNameInput(e) {
+        this.setState({name: e.target.value});
+        console.log("nimi: " + e.target.value);
+
     }
 
     phoneNumberAlert() {
@@ -124,7 +132,7 @@ class Apua extends Component {
 
                 <Jumbotron className="otsikko">
                     <h1>Pyydä apua</h1>
-                    <div className="helptext" sm={1} md={4}>
+                    <div className="helptext">
                     </div>
                 </Jumbotron>
 
@@ -148,6 +156,16 @@ class Apua extends Component {
                         {contactField}
                         {phoneWarningTextField}
                         {emailWarningTextField}
+
+                        <FormGroup controlId="formName">
+                            <ControlLabel>Nimi tai nimimerkki</ControlLabel>
+                            <FormControl
+                                type="text"
+                                placeholder="Syötä nimesi tai nimimerkkisi"
+                                onChange={(e) => this.handleNameInput(e)}
+                            />
+                        </FormGroup>
+
 
                         <FormGroup controlId="formControlsTextarea">
                             <ControlLabel className="form-field">Miten voimme auttaa? </ControlLabel>

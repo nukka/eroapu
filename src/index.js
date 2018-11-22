@@ -5,6 +5,7 @@ import Apua from './Apua';
 import Aikajana from './Aikajana';
 import Palveluhaku from './Palveluhaku';
 import Kalenteri from './Kalenteri';
+import Tulokset from './Tulokset';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
@@ -12,6 +13,7 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {
     Col, Grid, Nav, Navbar, NavItem, Row, Image
 } from "react-bootstrap";
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
@@ -31,7 +33,7 @@ function Haku() {
     );
 }
 
-function Hätänappi() {
+function Hatanappi() {
     return (
         <Apua/>
     );
@@ -47,6 +49,12 @@ function Tapahtumakalenteri() {
     return (
         <Kalenteri/>
     );
+
+    function Tulokset() {
+        return (
+            <Tulokset/>
+        );
+    }
 }
 
 ReactDOM.render((
@@ -87,9 +95,10 @@ ReactDOM.render((
                 <Switch>
                     <Route exact path="/" component={Etusivu}/>
                     <Route path="/haku" component={Haku}/>
-                    <Route path="/apua" component={Hätänappi}/>
+                    <Route path="/apua" component={Hatanappi}/>
                     <Route path="/aikajana" component={Jana}/>
                     <Route path="/kalenteri" component={Tapahtumakalenteri}/>
+                    <Route path="/tulokset" component={Tulokset}/>
                 </Switch>
             </div>
             <div className="page-footer">
@@ -119,7 +128,7 @@ ReactDOM.render((
 
 
                         <Col md={3}><p className="footer-title"> Ylläpitäjän logo </p> <Image
-                            src="https://bitbucket.org/eroauttaminenverkossa/eroapu/raw/754ce3e30471f9d03f02f40bb301990dcd83dec0/src/Logo.png"/></Col>
+                            src="https://bitbucket.org/eroauttaminenverkossa/eroapu/raw/cd93527332fb2b84575e7f4ba0baa2a7a1c8a4e9/src/Logo.png"/></Col>
                     </Row>
                 </Grid>
             </div>
