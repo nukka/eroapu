@@ -58,8 +58,9 @@ application.get('/api/aikajana/olen_eronnut', function (req, res) {
 
 });
 
-application.get('/api/palveluhaku', function (req, res) {
+application.get('/api/haku', function (req, res) {
 
+    console.log("api/haku");
 
     con.query('CREATE TABLE IF NOT EXISTS palveluhaku (title VARCHAR(255), link VARCHAR(255), source VARCHAR(255), aikuinen BIT, lapsitainuori BIT, asiantuntija BIT,  informationtype VARCHAR(255));', function (error, results) {
         if (error) throw error;
@@ -110,6 +111,18 @@ application.get('/api/palveluhaku', function (req, res) {
         res.send(results)
     });
 
+});
+
+application.get('/api/haku/:id', function (req, res) {
+    console.log("parameters taken");
+
+    con.query('SELECT * FROM mysql.palveluhaku WHERE informationtype = "Chat";', function (error, results) {
+        if (error) throw error;
+        res.send(results)
+    });
+
+    console.log("data: " + req.body);
+    console.log("data: " + req.query.params);
 });
 
 

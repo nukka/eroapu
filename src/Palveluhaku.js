@@ -3,7 +3,6 @@ import {
     Col,
     Jumbotron,
     Row,
-    Table,
     Button,
     ButtonGroup,
     Glyphicon
@@ -36,15 +35,12 @@ class Palveluhaku extends Component {
         this.state = {
             isClicked: false,
             results: []
-        }
-
-        fetch('http://localhost:3001/api/palveluhaku')
-            .then(response => response.json())
-            .then(results => (this.setState({results})));
+        };
 
     }
 
-    handleClick() {
+
+    handleClick(e) {
         this.setState({
             isClicked: true,
         });
@@ -65,11 +61,30 @@ class Palveluhaku extends Component {
     };
 
     handleFormSubmit = formSubmitEvent => {
+        console.log("handling form submit");
         formSubmitEvent.preventDefault();
+
+        let chosen = {};
 
         for (const checkbox of this.selectedCheckboxes) {
             console.log("Valittuna " + checkbox);
+            chosen[checkbox] = 1;
         }
+
+        let querystring = require("query-string");
+
+        console.log("chosen: " + JSON.stringify(chosen));
+        console.log("qstring: " + querystring.stringify(chosen));
+
+        var qs = querystring.stringify(chosen);
+        console.log("url: " + qs +', linkki: http://localhost:3001/api/haku/' + qs);
+
+        fetch('http://localhost:3001/api/haku/' + qs)
+            .then(response => response.json())
+            .then(results => (this.setState({results})));
+
+        console.log("results: " + this.state.results);
+
     };
 
     createCheckbox = label => (
@@ -88,17 +103,16 @@ class Palveluhaku extends Component {
         kohderyhma.map(this.createCheckbox)
     );
 
-
     render() {
 
-        let searchResultsTest = this.state.results.map(function (item) {
+        let content = this.state.results.map((item) => {
             return (
-                    <p align="center">
-                        {item.informationtype}: {item.title} <a href={item.link}> <br/> {item.source} </a>
-
-                    </p>
-            );
-        });
+                <Button onClick={this.handleClick} className="dropdown-button">
+                    {item.informationtype}: &nbsp;
+                    <Glyphicon className="dropdown-button-glyphicon" glyph="glyphicon glyphicon-chevron-down"/>
+                    {item.title} <a href={item.link}> <br/> {item.source} </a>
+                </Button>
+            )});
 
         return (
             <div className="container">
@@ -126,13 +140,11 @@ class Palveluhaku extends Component {
                 <div className="spacer">
                     <Row className="show-grid">
                         <Col xsOffset={4}>
-                            {this.state.isClicked ? <DropdownTableButton/> : null}
+                            {this.state.isClicked ? <div className="dropdown-table">
+                                <ButtonGroup vertical block>{content} </ButtonGroup> </div> : null}
                         </Col>
                     </Row>
                 </div>
-
-                {searchResultsTest}
-
 
             </div>
         );
@@ -176,59 +188,4 @@ class CheckboxGroup extends Component { //The code of this class is from http://
 
 
 }
-
-
-class DropdownTableButton extends Component {
-    constructor(props) {
-        super(props);
-        this.handleClick = this.handleClick.bind(this);
-
-        this.state = {
-            isClicked: false,
-        }
-    }
-
-    handleClick() {
-        this.setState(({isClicked}) => (
-            {
-                isClicked: !isClicked,
-            }
-        ));
-    }
-
-    render() {
-        return (
-
-            <div className="dropdown-table">
-                <ButtonGroup vertical block>
-                    <Button onClick={this.handleClick} className="dropdown-button">
-                        Tukipuhelin
-                        <Glyphicon className="dropdown-button-glyphicon" glyph="glyphicon glyphicon-chevron-down"/>
-                    </Button>
-                    {this.state.isClicked ? <DropdownTableContent/> : null}
-                </ButtonGroup>
-            </div>)
-    }
-}
-
-class DropdownTableContent extends Component {
-    render() {
-        return (
-
-            <Table striped bordered condensed hover>
-                <tbody>
-                <tr>
-                    <td>Väestöliitto</td>
-                </tr>
-                <tr>
-                    <td>MLL</td>
-                </tr>
-                </tbody>
-            </Table>
-
-        )
-    }
-}
-
-
 export default Palveluhaku;
