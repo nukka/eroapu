@@ -63,7 +63,7 @@ application.get('/api/haku', function (req, res) {
 
     console.log("api/haku");
 
-    con.query('CREATE TABLE IF NOT EXISTS palveluhaku (title VARCHAR(255), link VARCHAR(255), source VARCHAR(255), aikuinen BIT, lapsitainuori BIT, asiantuntija BIT,  informationtype VARCHAR(255));', function (error, results) {
+    con.query('CREATE TABLE IF NOT EXISTS palveluhaku (title VARCHAR(255), link VARCHAR(255), source VARCHAR(255), aikuinen BOOLEAN DEFAULT 0, lapsitainuori BOOLEAN DEFAULT 0, asiantuntija BOOLEAN DEFAULT 0,  informationtype VARCHAR(255));', function (error, results) {
         if (error) throw error;
     });
 
@@ -120,7 +120,7 @@ application.get('/api/haku', function (req, res) {
 
 application.get('/api/haku/:id', function (req, res) {
 
-    con.query('CREATE TABLE IF NOT EXISTS palveluhakutulokset (title VARCHAR(255), link VARCHAR(255), source VARCHAR(255), aikuinen BIT, lapsitainuori BIT, asiantuntija BIT,  informationtype VARCHAR(255));', function (error, results) {
+    con.query('CREATE TABLE IF NOT EXISTS palveluhakutulokset (title VARCHAR(255), link VARCHAR(255), source VARCHAR(255), aikuinen BOOLEAN, lapsitainuori BOOLEAN, asiantuntija BOOLEAN,  informationtype VARCHAR(255));', function (error, results) {
         if (error) throw error;
     });
 
@@ -130,12 +130,10 @@ application.get('/api/haku/:id', function (req, res) {
 
     let value = req.url;
     value = value.split('/').pop();
-    console.log("data: " + value);
+    console.log("url: " + value);
     let values = querystring.parse(value);
-    console.log(values);
 
     for (let item in values){
-        console.log(item);
         con.query('INSERT INTO palveluhakutulokset SELECT * FROM mysql.palveluhaku WHERE informationtype = ?;', item, function (error, results) {
             if (error) throw error;
         });
