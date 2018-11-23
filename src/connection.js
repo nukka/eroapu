@@ -71,7 +71,7 @@ application.get('/api/haku', function (req, res) {
         if (error) throw error;
     });
 
-    con.query('LOAD DATA LOCAL INFILE \'csv/ajankohtainen_informaatio.csv\' INTO TABLE palveluhaku FIELDS TERMINATED BY \',\' ENCLOSED BY \'"\' LINES TERMINATED BY \'\\n\' IGNORE 1 ROWS (@dummy, title, link, source, aikuinen, lapsitainuori, asiantuntija, informationtype) SET informationtype = "Ajankohtainen informaatio";', function (error, results) {
+    con.query('LOAD DATA LOCAL INFILE \'csv/ajankohtainen_informaatio.csv\' INTO TABLE palveluhaku FIELDS TERMINATED BY \',\' ENCLOSED BY \'"\' LINES TERMINATED BY \'\\n\' IGNORE 1 ROWS (@dummy, title, link, source, aikuinen, lapsitainuori, asiantuntija, informationtype) SET informationtype = "Ajankohtainen informaatio/uutiset";', function (error, results) {
         if (error) throw error;
     });
 
@@ -107,6 +107,10 @@ application.get('/api/haku', function (req, res) {
         if (error) throw error;
     });
 
+    con.query('LOAD DATA LOCAL INFILE \'csv/peli.csv\' INTO TABLE palveluhaku FIELDS TERMINATED BY \',\' ENCLOSED BY \'"\' LINES TERMINATED BY \'\\n\' IGNORE 1 ROWS (@dummy, title, link, source, aikuinen, lapsitainuori, asiantuntija, informationtype) SET informationtype = "Pelit";', function (error, results) {
+        if (error) throw error;
+    });
+
     con.query('SELECT * FROM mysql.palveluhaku;', function (error, results) {
         if (error) throw error;
         res.send(results)
@@ -116,6 +120,14 @@ application.get('/api/haku', function (req, res) {
 
 application.get('/api/haku/:id', function (req, res) {
 
+    con.query('CREATE TABLE IF NOT EXISTS palveluhakutulokset (title VARCHAR(255), link VARCHAR(255), source VARCHAR(255), aikuinen BIT, lapsitainuori BIT, asiantuntija BIT,  informationtype VARCHAR(255));', function (error, results) {
+        if (error) throw error;
+    });
+
+    con.query('TRUNCATE TABLE palveluhakutulokset', function (error, results) {
+        if (error) throw error;
+    });
+
     let value = req.url;
     value = value.split('/').pop();
     console.log("data: " + value);
@@ -124,12 +136,12 @@ application.get('/api/haku/:id', function (req, res) {
 
     for (let item in values){
         console.log(item);
-        con.query('SELECT * FROM mysql.palveluhaku WHERE informationtype = ?;', item, function (error, results) {
+        con.query('INSERT INTO palveluhakutulokset SELECT * FROM mysql.palveluhaku WHERE informationtype = ?;', item, function (error, results) {
             if (error) throw error;
         });
     }
 
-    con.query('SELECT * FROM mysql.palveluhaku WHERE informationtype = "0";', function (error, results) {
+    con.query('SELECT * FROM mysql.palveluhakutulokset;', function (error, results) {
         if (error) throw error;
         res.send(results)
     });
