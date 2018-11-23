@@ -10,6 +10,8 @@ import {
     Jumbotron
 } from 'react-bootstrap'
 
+import axios from 'axios';
+
 class Apua extends Component {
 
     constructor(props) {
@@ -75,12 +77,29 @@ class Apua extends Component {
     handleTextInput(e) {
         this.setState({formtext: e.target.value});
         console.log("teksti: " + e.target.value);
+
+        const text = {
+            name: this.state.name,
+        };
+
+        axios.post(`http://localhost:3001/api/`, {text})
+            .then(res => {
+                console.log(res.data);
+            })
     }
 
     handleNameInput(e) {
         this.setState({name: e.target.value});
         console.log("nimi: " + e.target.value);
 
+        const name = {
+            name: this.state.name,
+        };
+
+        axios.post(`http://localhost:3001/api/`, {name})
+            .then(res => {
+                console.log(res.data);
+            })
     }
 
     phoneNumberAlert() {
