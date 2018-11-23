@@ -3,6 +3,7 @@ var express = require('express');
 var application = express();
 
 var cors = require('cors');
+let querystring = require("query-string");
 
 var con = mysql.createConnection({
     host: "localhost",
@@ -114,17 +115,25 @@ application.get('/api/haku', function (req, res) {
 });
 
 application.get('/api/haku/:id', function (req, res) {
-    console.log("parameters taken");
 
-    con.query('SELECT * FROM mysql.palveluhaku WHERE informationtype = "Chat";', function (error, results) {
+    let value = req.url;
+    value = value.split('/').pop();
+    console.log("data: " + value);
+    let values = querystring.parse(value);
+    console.log(values);
+
+    for (let item in values){
+        console.log(item);
+        con.query('SELECT * FROM mysql.palveluhaku WHERE informationtype = ?;', item, function (error, results) {
+            if (error) throw error;
+        });
+    }
+
+    con.query('SELECT * FROM mysql.palveluhaku WHERE informationtype = "0";', function (error, results) {
         if (error) throw error;
         res.send(results)
     });
-
-    console.log("data: " + req.body);
-    console.log("data: " + req.query.params);
 });
-
 
 application.listen(3001, () => {
     console.log('http://localhost:3001/api/aikajana/harkitsen_eroa');
