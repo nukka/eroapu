@@ -21,7 +21,7 @@ class App extends Component {
 
                         <Col md={7}>
                             <Image className="front-page-image"
-                                   src="https://bytebucket.org/eroauttaminenverkossa/eroapu/raw/8809d2296162010e25da88537204494b0413d998/src/images/sydan_perhe.jpg?token=11d1925cd2c4384bef4178e356fcaa3455ba2535"/>
+                                   src="https://bytebucket.org/eroauttaminenverkossa/eroapu/raw/be4ff7a0e3ec6a28f9f3c66f06371c7bc15dcf61/src/images/lapsiperhe.jpg?token=a7e0ad896ff1025e622a5e6ab616803425b545dd"/>
                         </Col>
 
 
