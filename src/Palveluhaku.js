@@ -123,6 +123,10 @@ class Palveluhaku extends Component {
                 </Button>
             )});
 
+        if (content.length < 1) {
+            content = <p> Tuloksia ei löytynyt. Kokeile uudestaan eri hakuehdoin. </p>
+        }
+
         return (
             <div className="container">
                 <Jumbotron className="otsikko">
@@ -150,7 +154,7 @@ class Palveluhaku extends Component {
                     <Row className="show-grid">
                         <Col xsOffset={4}>
                             {this.state.isClicked ? <div className="dropdown-table">
-                                <ButtonGroup vertical block>{content} </ButtonGroup> </div> : null}
+                                <ButtonGroup>{content} </ButtonGroup> </div> : null}
                         </Col>
                     </Row>
                 </div>
