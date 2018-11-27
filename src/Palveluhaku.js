@@ -65,11 +65,20 @@ class Palveluhaku extends Component {
         formSubmitEvent.preventDefault();
 
         let chosen = {};
+        let topics = [];
+        let targets = [];
 
         for (const checkbox of this.selectedCheckboxes) {
             console.log("Valittuna " + checkbox);
-            chosen[checkbox] = 1;
+            if (checkbox === "Aikuinen" || checkbox === "Lapsi") {
+                targets.push(checkbox);
+            } else {
+                topics.push(checkbox);
+            }
         }
+
+        chosen["topic"] = topics;
+        chosen["target"] = targets;
 
         let querystring = require("query-string");
 
@@ -77,14 +86,14 @@ class Palveluhaku extends Component {
         console.log("qstring: " + querystring.stringify(chosen));
 
         var qs = querystring.stringify(chosen);
+
         console.log("url: " + qs +', linkki: http://localhost:3001/api/haku/' + qs);
 
         fetch('http://localhost:3001/api/haku/' + qs)
             .then(response => response.json())
             .then(results => (this.setState({results})));
 
-        console.log("results: " + this.state.results);
-
+        console.log("results: " + JSON.stringify(this.state.results));
     };
 
     createCheckbox = label => (
@@ -185,7 +194,5 @@ class CheckboxGroup extends Component { //The code of this class is from http://
             </div>
         );
     }
-
-
 }
 export default Palveluhaku;
