@@ -14,23 +14,30 @@ import axios from 'axios';
 
 class Apua extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            radioSelected: '',
+            email: '',
+            phonenumber: '',
+            formtext: '',
+            name: '',
+            showphonewarning: false,
+            showemailwarning: false,
+            disableButton: true
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+
+
     state = {
         feedback: '',
         formSubmitted: false
     };
 
-
-    handleCancel = this.handleCancel.bind(this);
-    handleChange = this.handleChange.bind(this);
-    handleSubmit = this.handleSubmit.bind(this);
-
-    static sender = 'sender@example.com';
-
-    handleCancel() {
-        this.setState({
-            feedback: ''
-        });
-    }
 
     handleChange(event) {
         this.setState({
@@ -52,7 +59,6 @@ class Apua extends Component {
 
         this.sendFeedback(
             template,
-            this.sender,
             receiverEmail,
             this.state.feedback
         );
@@ -79,19 +85,7 @@ class Apua extends Component {
             .catch(err => console.error('Failed to send feedback. Error: ', err));
     }
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            radioSelected: '',
-            email: '',
-            phonenumber: '',
-            formtext: '',
-            name: '',
-            showphonewarning: false,
-            showemailwarning: false,
-            disableButton: true
-        }
-    }
+
 
     handleUserInput(e) {
         const value = e.target.value;
@@ -258,30 +252,11 @@ class Apua extends Component {
                                          placeholder="Kirjoita tähän, millaista apua tarvitset"/>
                         </FormGroup>
 
-                        <Button onClick={() => console.log(this.state)} type="submit"
+                        <Button type="submit" value="Submit" onClick={this.handleSubmit}
                                 disabled={this.state.disableButton} className="btn default"> Lähetä </Button>
 
                     </Form>
                 </div>
-
-                <form className="feedback-form" onSubmit={this.handleSubmit}>
-                    <h1>Your Feedback</h1>
-                    <textarea
-                        className="text-input"
-                        id="feedback-entry"
-                        name="feedback-entry"
-                        onChange={this.handleChange}
-                        placeholder="Enter your feedback here"
-                        required
-                        value={this.state.feedback}
-                    />
-                    <div className="btn-group">
-                        <button className="btn btn--cancel" onClick={this.handleCancel}>
-                            Cancel
-                        </button>
-                        <input type="submit" value="Submit" className="btn btn--submit" />
-                    </div>
-                </form>
             </div>
 
 
