@@ -60,10 +60,6 @@ class Hakupalkki extends Component {
             results: [],
         };
 
-        fetch('http://localhost:3001/api/palveluhaku')
-            .then(response => response.json())
-            .then(results => (this.setState({results})));
-
     }
 
     handleChange(e) {
