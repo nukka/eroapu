@@ -10,8 +10,6 @@ import {
     Jumbotron
 } from 'react-bootstrap'
 
-import axios from 'axios';
-
 class Apua extends Component {
 
     constructor(props) {
@@ -25,8 +23,82 @@ class Apua extends Component {
             showphonewarning: false,
             showemailwarning: false,
             disableButton: true
-        }
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+
+    state = {
+        feedback: '',
+        formSubmitted: false
+    };
+
+
+    handleChange(event) {
+        this.setState({
+            feedback: event.target.value
+        });
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+
+        const env = {
+            REACT_APP_EMAILJS_RECEIVER: process.env.REACT_APP_EMAILJS_RECEIVER,
+            REACT_APP_EMAILJS_TEMPLATEID: "template_lxucH6tK"
+        };
+
+        const {
+            REACT_APP_EMAILJS_RECEIVER: receiverEmail,
+            REACT_APP_EMAILJS_TEMPLATEID: template
+        } = env;
+
+        this.sendFeedback(
+            template,
+            receiverEmail,
+            this.state.feedback
+        );
+
+        this.setState({
+            formSubmitted: true
+        });
+    }
+
+    sendFeedback(templateId, from_name, message_html, from_email, from_phone) {
+
+        this.handleNameInput = this.handleNameInput.bind(this);
+        this.handleTextInput = this.handleTextInput.bind(this);
+        this.handleUserInput = this.handleUserInput.bind(this);
+
+        from_name = this.state.name;
+        message_html = this.state.formtext;
+        from_email = this.state.email;
+        from_phone = this.state.phonenumber;
+
+        if (from_email === '') {
+            from_email = "Ei annettu";
+        } else if (from_phone === '') {
+            from_phone = "Ei annettu"
+        }
+
+        window.emailjs
+            .send('gmail', templateId, {
+                from_name,
+                message_html,
+                from_email,
+                from_phone
+            })
+            .then(res => {
+                this.setState({
+                    formEmailSent: true
+                });
+            })
+            // Handle errors here however you like
+            .catch(err => console.error('Failed to send feedback. Error: ', err));
+    }
+
 
     handleUserInput(e) {
         const value = e.target.value;
@@ -78,28 +150,14 @@ class Apua extends Component {
         this.setState({formtext: e.target.value});
         console.log("teksti: " + e.target.value);
 
-        const text = {
-            name: this.state.name,
-        };
 
-        axios.post(`http://localhost:3001/api/`, {text})
-            .then(res => {
-                console.log(res.data);
-            })
     }
 
     handleNameInput(e) {
         this.setState({name: e.target.value});
         console.log("nimi: " + e.target.value);
 
-        const name = {
-            name: this.state.name,
-        };
 
-        axios.post(`http://localhost:3001/api/`, {name})
-            .then(res => {
-                console.log(res.data);
-            })
     }
 
     phoneNumberAlert() {
@@ -193,12 +251,14 @@ class Apua extends Component {
                                          placeholder="Kirjoita tähän, millaista apua tarvitset"/>
                         </FormGroup>
 
-                        <Button onClick={() => console.log(this.state)} type="submit"
+                        <Button type="submit" value="Submit" onClick={this.handleSubmit}
                                 disabled={this.state.disableButton} className="btn default"> Lähetä </Button>
 
                     </Form>
                 </div>
             </div>
+
+
         );
     }
 }
