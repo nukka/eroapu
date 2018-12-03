@@ -6,6 +6,7 @@ import Aikajana from './Aikajana';
 import Palveluhaku from './Palveluhaku';
 import Kalenteri from './Kalenteri';
 import Tulokset from './Tulokset';
+import logo from './images/Logo.png';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
@@ -107,10 +108,7 @@ ReactDOM.render((
                         <Col md={3}>
 
                             <p className="footer-title"> Eroportaali </p>
-                            Eroportaalista löydät tiedon koottuna. Lorem ipsum dolor sit amet, no dicit maiorum
-                            appetere est, pro te hinc quas verear. Petentium elaboraret pro ne. Ludus nostrum fastidii
-                            usu cu, mel stet forensibus ut, has id imperdiet intellegebat. Et officiis laboramus sed,
-                            vis ne case reque liberavisse, summo partiendo facilisis sed no.
+                            Eroportaalista löydät koottuna eroon liittyvää tietoa. Aikajanalla näet eron eri vaiheet. Palveluhaun avulla voit hakea tietoa eri kohderyhmille useista eri aihepiireistä. Tapahtumakalenterista näet eroon liittyviä tapahtumia. Tarjoamme myös apua sitä tarvitseville.
 
                         </Col>
                         <Col md={6} className="footer-middle">
@@ -128,7 +126,7 @@ ReactDOM.render((
 
 
                         <Col md={3}><p className="footer-title"> Ylläpitäjän logo </p> <Image
-                            src="https://bitbucket.org/eroauttaminenverkossa/eroapu/raw/cd93527332fb2b84575e7f4ba0baa2a7a1c8a4e9/src/Logo.png"/></Col>
+                            src={logo}/></Col>
                     </Row>
                 </Grid>
             </div>
