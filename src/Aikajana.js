@@ -28,7 +28,7 @@ class Aikajana extends Component {
         this.setState({show1stContent: !this.state.show1stContent});
     }
 
-    toggleTimeLine2ndElement (){
+    toggleTimeLine2ndElement() {
         console.log("showcontent2: " + this.state.show2ndContent);
         this.setState({show2ndContent: !this.state.show2ndContent});
     }
@@ -56,37 +56,42 @@ class Aikajana extends Component {
             <div className="timeline">
                 <Jumbotron className="otsikko">
                     <h1>Aikajana</h1>
-                    <div className="helptext" sm={1} md={4}> Alle on listattu eron eri vaiheet. Lorem ipsum dolor sit
-                        amet, no dicit maiorum
-                        appetere est, pro te hinc quas verear.
+                    <div className="helptext"> Alle on listattu eron eri vaiheet. Klikkaa elementtiä aikajanalla, niin
+                        saat tietoa valitsemastasi vaiheesta.
                     </div>
                 </Jumbotron>
 
                 <VerticalTimeline>
 
-                    <VerticalTimelineElement
-                        className="vertical-timeline-element--work"
-                        iconStyle={{background: 'rgb(33, 150, 243)', color: '#fff'}}
-                    >
-                        <div onClick={() => this.toggleTimeLine1stElement()}>
-                            <h3 className="vertical-timeline-element-title">Harkitsen eroa</h3>
-                            <Glyphicon className="pull-right" glyph="glyphicon glyphicon-menu-down"/>
-                            {this.state.show1stContent && consideringContent}
+                    <div className="vertical-timeline-element--work vertical-timeline-element"
+                         onClick={() => this.toggleTimeLine1stElement()}>
+                        <div>
+                            <span className="vertical-timeline-element-icon bounce-in"
+                                  style={{background: 'rgb(33, 150, 243)', color: 'rgb(255, 255, 255)'}}/>
+                            <div className="vertical-timeline-element-content bounce-in">
+                                <div><h3 className="vertical-timeline-element-title">Harkitsen eroa</h3><span
+                                    className="pull-right glyphicon glyphicon-glyphicon glyphicon-menu-down"/>
+                                </div>
+                                <span className="vertical-timeline-element-date"/>
+                                {this.state.show1stContent && consideringContent}</div>
                         </div>
-                    </VerticalTimelineElement>
+                    </div>
 
-                    <VerticalTimelineElement
-                        className="vertical-timeline-element--work"
-                        iconStyle={{background: 'rgb(255,105,180)', color: '#fff'}}
-                    >
-                        <div onClick={() => this.toggleTimeLine2ndElement()}>
-                            <h3 className="vertical-timeline-element-title">Olen eronnut</h3>
-                            <div className="down-arrow">
-                            <Glyphicon className="down-arrow pull-right" glyph="glyphicon glyphicon-menu-down"/></div>
-                            {this.state.show2ndContent && divorcedContent}
+                    <div className="vertical-timeline-element--work vertical-timeline-element"
+                         onClick={() => this.toggleTimeLine2ndElement()}>
+                        <div>
+                            <span className="vertical-timeline-element-icon bounce-in"
+                                  style={{background: 'rgb(233, 30, 99)', color: 'rgb(255, 255, 255)'}}/>
+                            <div className="vertical-timeline-element-content bounce-in">
+                                <div><h3 className="vertical-timeline-element-title">Olen eronnut</h3><span
+                                    className="pull-right glyphicon glyphicon-glyphicon glyphicon-menu-down"/>
+                                </div>
+                                <span className="vertical-timeline-element-date"/>
+                                {this.state.show2ndContent && divorcedContent}</div>
                         </div>
+                    </div>
 
-                    </VerticalTimelineElement></VerticalTimeline>
+                </VerticalTimeline>
 
 
             </div>
