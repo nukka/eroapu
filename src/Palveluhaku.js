@@ -4,8 +4,7 @@ import {
     Jumbotron,
     Row,
     Button,
-    ButtonGroup,
-    Glyphicon
+    ButtonGroup
 } from 'react-bootstrap';
 
 const palvelut = [ //nämä tiedot otetaan myöhemmin tekstitiedostosta/tietokannasta
@@ -47,7 +46,6 @@ class Palveluhaku extends Component {
         console.log("State: " + this.state.isClicked);
     }
 
-
     componentWillMount = () => { // The functions of this class are borrowed from http://react.tips/checkboxes-in-react/
         this.selectedCheckboxes = new Set();
     };
@@ -87,13 +85,11 @@ class Palveluhaku extends Component {
 
         var qs = querystring.stringify(chosen);
 
-        console.log("url: " + qs +', linkki: http://localhost:3001/api/haku/' + qs);
+        console.log("url: " + qs + ', linkki: http://localhost:3001/api/haku/' + qs);
 
         fetch('http://localhost:3001/api/haku/' + qs)
             .then(response => response.json())
             .then(results => (this.setState({results})));
-
-        console.log("results: " + JSON.stringify(this.state.results));
     };
 
     createCheckbox = label => (
@@ -113,7 +109,7 @@ class Palveluhaku extends Component {
     );
 
     render() {
-
+        /*
         let content = this.state.results.map((item) => {
             return (
                 <Button onClick={this.handleClick} className="dropdown-button">
@@ -121,7 +117,41 @@ class Palveluhaku extends Component {
                     <Glyphicon className="dropdown-button-glyphicon" glyph="glyphicon glyphicon-chevron-down"/>
                     {item.title} <a href={item.link}> <br/> {item.source} </a>
                 </Button>
-            )});
+            )
+        });
+
+        */
+
+        let grouped = this.state.results.reduce((group, {title, link, source, informationtype}) => {
+            let items = [];
+            items[0] = title;
+            items[1] = link;
+            items[2] = source;
+            (group[informationtype] = group[informationtype] || []).push(items);
+            return group;
+        }, {});
+
+        let content = [];
+
+        console.log("grouped: " + JSON.stringify(grouped));
+
+        for (let item in grouped) {
+            console.log("item: " + item);
+            let title = item;
+
+
+            let list = grouped[item].map((i) => {
+                return (
+                    <div>
+                            {i[0] + ": "} <a href={i[1]}> {i[2]} </a>
+                    </div>
+                )
+            });
+
+            content.push(<Button onClick={this.handleClick} className="dropdown-button"> <div id={title}>{item} </div> </Button>);
+            //content.push(<Button onClick={this.handleClick} className="dropdown-button"> {item} {list} </Button>);
+            content.push(list);
+        }
 
         if (content.length < 1) {
             content = <p> Tuloksia ei löytynyt. Kokeile uudestaan eri hakuehdoin. </p>
@@ -154,7 +184,8 @@ class Palveluhaku extends Component {
                     <Row className="show-grid">
                         <Col xsOffset={4}>
                             {this.state.isClicked ? <div className="dropdown-table">
-                                <ButtonGroup>{content} </ButtonGroup> </div> : null}
+                                <ButtonGroup vertical block> {content} </ButtonGroup></div> : null}
+
                         </Col>
                     </Row>
                 </div>
@@ -199,4 +230,5 @@ class CheckboxGroup extends Component { //The code of this class is from http://
         );
     }
 }
+
 export default Palveluhaku;
