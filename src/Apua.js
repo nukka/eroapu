@@ -22,7 +22,8 @@ class Apua extends Component {
             name: '',
             showphonewarning: false,
             showemailwarning: false,
-            disableButton: true
+            disableButton: true,
+            showSuccessText: false,
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -75,6 +76,8 @@ class Apua extends Component {
         this.handleTextInput = this.handleTextInput.bind(this);
         this.handleUserInput = this.handleUserInput.bind(this);
 
+        this.setState({showSuccessText: false});
+
         from_name = this.state.name;
         message_html = this.state.formtext;
         from_email = this.state.email;
@@ -96,6 +99,7 @@ class Apua extends Component {
             .then(response => {
                 if (response.status === 200) {
                     console.log("Lomake lähetty");
+                    this.setState({showSuccessText: true});
                 }
             })
 
@@ -195,12 +199,19 @@ class Apua extends Component {
 
     }
 
+    showSuccess() {
+        if (this.state.showSuccessText === true) {
+            return <p>Lomake lähetty</p>;
+        }
+    }
 
     render() {
 
         let contactField = null;
         let phoneWarningTextField = this.phoneNumberAlert();
         let emailWarningTextField = this.emailAlert();
+
+        let testi = this.showSuccess();
         const radioSelected = this.state.radioSelected;
         if (radioSelected === 'phone') {
             contactField =
@@ -265,6 +276,7 @@ class Apua extends Component {
                         <Button type="submit" value="Submit" onClick={this.handleSubmit}
                                 disabled={this.state.disableButton} className="btn default"> Lähetä </Button>
 
+                        {testi}
                     </Form>
                 </div>
             </div>
