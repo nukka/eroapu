@@ -58,13 +58,16 @@ class Apua extends Component {
         this.sendFeedback(
             template,
             receiverEmail,
-            this.state.feedback
+            this.state.feedback,
         );
+
 
         this.setState({
             formSubmitted: true
         });
+
     }
+
 
     sendFeedback(templateId, from_name, message_html, from_email, from_phone) {
 
@@ -90,13 +93,19 @@ class Apua extends Component {
                 from_email,
                 from_phone
             })
-            .then(res => {
-                this.setState({
-                    formEmailSent: true
-                });
+            .then(response => {
+                if (response.status === 200) {
+                    console.log("Lomake lähetty");
+                }
             })
-            // Handle errors here however you like
-            .catch(err => console.error('Failed to send feedback. Error: ', err));
+
+            .catch(err => {
+                if (err.status !== 200) {
+                    console.log("Lomaketta ei lähetty");
+                }
+
+            });
+
     }
 
 
@@ -183,7 +192,9 @@ class Apua extends Component {
 
     handleRadioClick(e) {
         this.setState({radioSelected: e});
+
     }
+
 
     render() {
 
