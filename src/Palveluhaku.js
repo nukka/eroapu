@@ -36,7 +36,6 @@ class Palveluhaku extends Component {
             results: [],
             chosen: ""
         };
-
     }
 
     handleClick(e) {
@@ -49,7 +48,16 @@ class Palveluhaku extends Component {
     handleCategoryClick(id) {
         console.log("Button that was clicked: " + id);
         this.setState({chosen: id});
+
+        var element = document.getElementById(id);
+        if (element.style.display === "none") {
+            element.style.display = "block";
+        } else {
+            element.style.display = "none";
+        }
+
     }
+
 
     componentWillMount = () => { // The functions of this class are borrowed from http://react.tips/checkboxes-in-react/
         this.selectedCheckboxes = new Set();
@@ -129,19 +137,21 @@ class Palveluhaku extends Component {
 
         for (let item in grouped) {
             console.log("item: " + item);
+
             let title = item;
             let list = grouped[item].map((i) => {
                 return (
                     <div>
-                            {i[0] + ": "} <a href={i[1]}> {i[2]} </a>
+                        {i[0] + ": "} <a href={i[1]}> {i[2]} </a>
                     </div>
                 )
             });
 
-            content.push(<Button onClick={this.handleCategoryClick.bind(this, title)} className="dropdown-button"> {item} <div id={title} className="group-content">{(this.state.chosen===title) && list}</div> </Button>);
-            //content.push(<Button onClick={this.handleCategoryClick.bind(this, title)} className="dropdown-button"> {item} </Button>);
-            //content.push(<Button onClick={this.handleClick} className="dropdown-button"> {item} {list} </Button>);
-            //content.push(<div id={title} className="group-content">{(this.state.chosen===title) && list}</div>);
+            content.push(<Button onClick={this.handleCategoryClick.bind(this, title)}
+                                 className={"dropdown-button"}> <p> {item} </p>
+                <div id={title} className="group-content" style={{display: 'none'}}>{list}</div>
+                <span
+                    className="pull-right glyphicon glyphicon-glyphicon glyphicon-menu-down"/> </Button>);
         }
 
         if (content.length < 1) {
