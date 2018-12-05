@@ -33,17 +33,22 @@ class Palveluhaku extends Component {
 
         this.state = {
             isClicked: false,
-            results: []
+            results: [],
+            chosen: ""
         };
 
     }
-
 
     handleClick(e) {
         this.setState({
             isClicked: true,
         });
         console.log("State: " + this.state.isClicked);
+    }
+
+    handleCategoryClick(id) {
+        console.log("Button that was clicked: " + id);
+        this.setState({chosen: id});
     }
 
     componentWillMount = () => { // The functions of this class are borrowed from http://react.tips/checkboxes-in-react/
@@ -109,18 +114,6 @@ class Palveluhaku extends Component {
     );
 
     render() {
-        /*
-        let content = this.state.results.map((item) => {
-            return (
-                <Button onClick={this.handleClick} className="dropdown-button">
-                    {item.informationtype}: &nbsp;
-                    <Glyphicon className="dropdown-button-glyphicon" glyph="glyphicon glyphicon-chevron-down"/>
-                    {item.title} <a href={item.link}> <br/> {item.source} </a>
-                </Button>
-            )
-        });
-
-        */
 
         let grouped = this.state.results.reduce((group, {title, link, source, informationtype}) => {
             let items = [];
@@ -132,14 +125,11 @@ class Palveluhaku extends Component {
         }, {});
 
         let content = [];
-
         console.log("grouped: " + JSON.stringify(grouped));
 
         for (let item in grouped) {
             console.log("item: " + item);
             let title = item;
-
-
             let list = grouped[item].map((i) => {
                 return (
                     <div>
@@ -148,9 +138,10 @@ class Palveluhaku extends Component {
                 )
             });
 
-            content.push(<Button onClick={this.handleClick} className="dropdown-button"> <div id={title}>{item} </div> </Button>);
+            content.push(<Button onClick={this.handleCategoryClick.bind(this, title)} className="dropdown-button"> {item} <div id={title} className="group-content">{(this.state.chosen===title) && list}</div> </Button>);
+            //content.push(<Button onClick={this.handleCategoryClick.bind(this, title)} className="dropdown-button"> {item} </Button>);
             //content.push(<Button onClick={this.handleClick} className="dropdown-button"> {item} {list} </Button>);
-            content.push(list);
+            //content.push(<div id={title} className="group-content">{(this.state.chosen===title) && list}</div>);
         }
 
         if (content.length < 1) {
