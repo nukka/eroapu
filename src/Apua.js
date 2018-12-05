@@ -7,8 +7,11 @@ import {
     Radio,
     ControlLabel,
     FormControl,
-    Jumbotron
+    Jumbotron,
+    Image
 } from 'react-bootstrap'
+
+import successLogo from './images/success.png';
 
 class Apua extends Component {
 
@@ -32,9 +35,13 @@ class Apua extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
 
         this.successText = (
-            <div onClick={this.handleSubmit}>
-                <p>Lomakkeen lähettäminen onnistui</p>
-                <p>Kiitos yhteydenotostasi! Pyrimme olemaan sinuun yhteydessä kolmen arkipäivän sisällä.</p>
+            <div className="success-text">
+                <div onClick={this.handleSubmit} className="helptext">
+                    <Image className="success-text-image" src={successLogo}/>
+                    <p>Kiitos yhteydenotostasi!</p>
+                    <p>Pyrimme olemaan sinuun yhteydessä
+                        kolmen arkipäivän sisällä.</p>
+                </div>
             </div>
         );
 
@@ -67,7 +74,7 @@ class Apua extends Component {
             REACT_APP_EMAILJS_TEMPLATEID: template
         } = env;
 
-       this.sendFeedback(
+        this.sendFeedback(
             template,
             receiverEmail,
             this.state.feedback,
@@ -245,7 +252,7 @@ class Apua extends Component {
 
             <div className="page-content">
 
-                <Jumbotron className="otsikko">
+                <Jumbotron className="otsikko" style={form}>
                     <h1>Pyydä apua</h1>
                     <div className="helptext">
                     </div>
