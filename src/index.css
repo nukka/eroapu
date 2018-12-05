@@ -183,6 +183,11 @@ ul {
     color: white;
 }
 
+.back-btn{
+    padding-top: 3%;
+    padding-bottom: 8%;
+}
+
 .feedback-text{
     text-align: center;
 }
