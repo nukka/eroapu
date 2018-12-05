@@ -12,6 +12,7 @@ import {
 } from 'react-bootstrap'
 
 import successLogo from './images/success.png';
+import errorLogo from './images/error.png';
 
 class Apua extends Component {
 
@@ -26,8 +27,8 @@ class Apua extends Component {
             showphonewarning: false,
             showemailwarning: false,
             disableButton: true,
-            showSuccessText: false,
             hideSuccessText: true,
+            hideErrorText: true,
             hideForm: false,
         };
 
@@ -35,12 +36,22 @@ class Apua extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
 
         this.successText = (
-            <div className="success-text">
+            <div className="feedback-text">
                 <div onClick={this.handleSubmit} className="helptext">
-                    <Image className="success-text-image" src={successLogo}/>
+                    <Image className="feedback-text-image" src={successLogo}/>
                     <p>Kiitos yhteydenotostasi!</p>
                     <p>Pyrimme olemaan sinuun yhteydessä
                         kolmen arkipäivän sisällä.</p>
+                </div>
+            </div>
+        );
+
+        this.errorText = (
+            <div className="feedback-text">
+                <div onClick={this.handleSubmit} className="helptext">
+                    <Image className="feedback-text-image" src={errorLogo}/>
+                    <p>Lomakkeen lähettäminen epäonnistui</p>
+                    <p>Tarkista internet-yhteytesi ja yritä uudelleen</p>
                 </div>
             </div>
         );
@@ -83,8 +94,6 @@ class Apua extends Component {
 
         this.setState({
             formSubmitted: true,
-            hideSuccessText: false,
-            hideForm: true,
         });
 
     }
@@ -96,7 +105,6 @@ class Apua extends Component {
         this.handleTextInput = this.handleTextInput.bind(this);
         this.handleUserInput = this.handleUserInput.bind(this);
 
-        this.setState({showSuccessText: false});
 
         from_name = this.state.name;
         message_html = this.state.formtext;
@@ -119,13 +127,18 @@ class Apua extends Component {
             .then(response => {
                 if (response.status === 200) {
                     console.log("Lomake lähetty");
-                    this.setState({showSuccessText: true});
+                    this.setState({hideSuccessText: false});
+                    this.setState({hideErrorText: true});
+                    this.setState({hideForm: true});
                 }
             })
 
             .catch(err => {
                 if (err.status !== 200) {
                     console.log("Lomaketta ei lähetty");
+                    this.setState({hideSuccessText: true});
+                    this.setState({hideErrorText: false});
+                    this.setState({hideForm: true});
                 }
 
             });
@@ -219,11 +232,6 @@ class Apua extends Component {
 
     }
 
-    showSuccess() {
-        if (this.state.showSuccessText === true) {
-            return <p>Lomake lähetty</p>;
-        }
-    }
 
     render() {
 
@@ -232,9 +240,9 @@ class Apua extends Component {
         let emailWarningTextField = this.emailAlert();
 
         let success = this.state.hideSuccessText ? {display: 'none'} : {};
+        let error = this.state.hideErrorText ? {display: 'none'} : {};
         let form = this.state.hideForm ? {display: 'none'} : {};
 
-        let testi = this.showSuccess();
         const radioSelected = this.state.radioSelected;
         if (radioSelected === 'phone') {
             contactField =
@@ -299,11 +307,16 @@ class Apua extends Component {
                         <Button type="submit" value="Submit" onClick={this.handleSubmit}
                                 disabled={this.state.disableButton} className="btn default"> Lähetä </Button>
 
-                        {testi}
+
                     </Form>
                 </div>
+
                 <div className="sentSuccess" style={success}>
                     {this.successText}
+                </div>
+
+                <div className="sentError" style={error}>
+                    {this.errorText}
                 </div>
 
             </div>

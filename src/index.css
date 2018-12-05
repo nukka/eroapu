@@ -183,14 +183,14 @@ ul {
     color: white;
 }
 
-.success-text{
+.feedback-text{
     text-align: center;
 }
 
-.success-text-image{
+.feedback-text-image{
     max-height: 10%;
     max-width: 10%;
-    padding-top: 10%;
+    padding-top: 5%;
     padding-bottom: 3%;
 }
 
