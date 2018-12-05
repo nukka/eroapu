@@ -24,10 +24,20 @@ class Apua extends Component {
             showemailwarning: false,
             disableButton: true,
             showSuccessText: false,
+            hideSuccessText: true,
+            hideForm: false,
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+
+        this.successText = (
+            <div onClick={this.handleSubmit}>
+                <p>Lomakkeen lähettäminen onnistui</p>
+                <p>Kiitos yhteydenotostasi! Pyrimme olemaan sinuun yhteydessä kolmen arkipäivän sisällä.</p>
+            </div>
+        );
+
     }
 
 
@@ -44,6 +54,7 @@ class Apua extends Component {
     }
 
     handleSubmit(event) {
+
         event.preventDefault();
 
         const env = {
@@ -56,7 +67,7 @@ class Apua extends Component {
             REACT_APP_EMAILJS_TEMPLATEID: template
         } = env;
 
-        this.sendFeedback(
+       this.sendFeedback(
             template,
             receiverEmail,
             this.state.feedback,
@@ -64,7 +75,9 @@ class Apua extends Component {
 
 
         this.setState({
-            formSubmitted: true
+            formSubmitted: true,
+            hideSuccessText: false,
+            hideForm: true,
         });
 
     }
@@ -211,6 +224,9 @@ class Apua extends Component {
         let phoneWarningTextField = this.phoneNumberAlert();
         let emailWarningTextField = this.emailAlert();
 
+        let success = this.state.hideSuccessText ? {display: 'none'} : {};
+        let form = this.state.hideForm ? {display: 'none'} : {};
+
         let testi = this.showSuccess();
         const radioSelected = this.state.radioSelected;
         if (radioSelected === 'phone') {
@@ -235,7 +251,7 @@ class Apua extends Component {
                     </div>
                 </Jumbotron>
 
-                <div id="lomake" className="container">
+                <div id="lomake" className="container" style={form}>
 
                     <p className="helptext"> Tarvitsetko neuvoa tai haluatko jutella jonkun kanssa eroon liittyvistä
                         asioista? Ota yhteyttä alla olevan lomakkeen avulla. Jos avuntarpeesi on akuuttia, soita
@@ -279,6 +295,10 @@ class Apua extends Component {
                         {testi}
                     </Form>
                 </div>
+                <div className="sentSuccess" style={success}>
+                    {this.successText}
+                </div>
+
             </div>
 
 
