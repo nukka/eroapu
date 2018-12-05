@@ -215,3 +215,8 @@ ul {
 .button-kalenteri {
     background-color: #ac85f0;
 }
+
+.group-content {
+    font-size: small;
+    font-weight: normal;
+}
