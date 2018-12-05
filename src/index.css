@@ -183,6 +183,17 @@ ul {
     color: white;
 }
 
+.feedback-text{
+    text-align: center;
+}
+
+.feedback-text-image{
+    max-height: 10%;
+    max-width: 10%;
+    padding-top: 5%;
+    padding-bottom: 3%;
+}
+
 .button-row {
     width: 70%;
     padding: 7%;

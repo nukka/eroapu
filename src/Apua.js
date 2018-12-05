@@ -7,8 +7,12 @@ import {
     Radio,
     ControlLabel,
     FormControl,
-    Jumbotron
+    Jumbotron,
+    Image
 } from 'react-bootstrap'
+
+import successLogo from './images/success.png';
+import errorLogo from './images/error.png';
 
 class Apua extends Component {
 
@@ -22,11 +26,36 @@ class Apua extends Component {
             name: '',
             showphonewarning: false,
             showemailwarning: false,
-            disableButton: true
+            disableButton: true,
+            hideSuccessText: true,
+            hideErrorText: true,
+            hideForm: false,
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+
+        this.successText = (
+            <div className="feedback-text">
+                <div onClick={this.handleSubmit} className="helptext">
+                    <Image className="feedback-text-image" src={successLogo}/>
+                    <p>Kiitos yhteydenotostasi!</p>
+                    <p>Pyrimme olemaan sinuun yhteydessä
+                        kolmen arkipäivän sisällä.</p>
+                </div>
+            </div>
+        );
+
+        this.errorText = (
+            <div className="feedback-text">
+                <div onClick={this.handleSubmit} className="helptext">
+                    <Image className="feedback-text-image" src={errorLogo}/>
+                    <p>Lomakkeen lähettäminen epäonnistui</p>
+                    <p>Tarkista internet-yhteytesi ja yritä uudelleen</p>
+                </div>
+            </div>
+        );
+
     }
 
 
@@ -43,6 +72,7 @@ class Apua extends Component {
     }
 
     handleSubmit(event) {
+
         event.preventDefault();
 
         const env = {
@@ -58,19 +88,23 @@ class Apua extends Component {
         this.sendFeedback(
             template,
             receiverEmail,
-            this.state.feedback
+            this.state.feedback,
         );
 
+
         this.setState({
-            formSubmitted: true
+            formSubmitted: true,
         });
+
     }
+
 
     sendFeedback(templateId, from_name, message_html, from_email, from_phone) {
 
         this.handleNameInput = this.handleNameInput.bind(this);
         this.handleTextInput = this.handleTextInput.bind(this);
         this.handleUserInput = this.handleUserInput.bind(this);
+
 
         from_name = this.state.name;
         message_html = this.state.formtext;
@@ -90,13 +124,25 @@ class Apua extends Component {
                 from_email,
                 from_phone
             })
-            .then(res => {
-                this.setState({
-                    formEmailSent: true
-                });
+            .then(response => {
+                if (response.status === 200) {
+                    console.log("Lomake lähetty");
+                    this.setState({hideSuccessText: false});
+                    this.setState({hideErrorText: true});
+                    this.setState({hideForm: true});
+                }
             })
-            // Handle errors here however you like
-            .catch(err => console.error('Failed to send feedback. Error: ', err));
+
+            .catch(err => {
+                if (err.status !== 200) {
+                    console.log("Lomaketta ei lähetty");
+                    this.setState({hideSuccessText: true});
+                    this.setState({hideErrorText: false});
+                    this.setState({hideForm: true});
+                }
+
+            });
+
     }
 
 
@@ -183,13 +229,20 @@ class Apua extends Component {
 
     handleRadioClick(e) {
         this.setState({radioSelected: e});
+
     }
+
 
     render() {
 
         let contactField = null;
         let phoneWarningTextField = this.phoneNumberAlert();
         let emailWarningTextField = this.emailAlert();
+
+        let success = this.state.hideSuccessText ? {display: 'none'} : {};
+        let error = this.state.hideErrorText ? {display: 'none'} : {};
+        let form = this.state.hideForm ? {display: 'none'} : {};
+
         const radioSelected = this.state.radioSelected;
         if (radioSelected === 'phone') {
             contactField =
@@ -207,13 +260,13 @@ class Apua extends Component {
 
             <div className="page-content">
 
-                <Jumbotron className="otsikko">
+                <Jumbotron className="otsikko" style={form}>
                     <h1>Pyydä apua</h1>
                     <div className="helptext">
                     </div>
                 </Jumbotron>
 
-                <div id="lomake" className="container">
+                <div id="lomake" className="container" style={form}>
 
                     <p className="helptext"> Tarvitsetko neuvoa tai haluatko jutella jonkun kanssa eroon liittyvistä
                         asioista? Ota yhteyttä alla olevan lomakkeen avulla. Jos avuntarpeesi on akuuttia, soita
@@ -254,8 +307,18 @@ class Apua extends Component {
                         <Button type="submit" value="Submit" onClick={this.handleSubmit}
                                 disabled={this.state.disableButton} className="btn default"> Lähetä </Button>
 
+
                     </Form>
                 </div>
+
+                <div className="sentSuccess" style={success}>
+                    {this.successText}
+                </div>
+
+                <div className="sentError" style={error}>
+                    {this.errorText}
+                </div>
+
             </div>
 
 
