@@ -39,9 +39,12 @@ class Apua extends Component {
             <div className="feedback-text">
                 <div onClick={this.handleSubmit} className="helptext">
                     <Image className="feedback-text-image" src={successLogo}/>
-                    <p>Kiitos yhteydenotostasi!</p>
+                    <p><b>Kiitos yhteydenotostasi!</b></p>
                     <p>Pyrimme olemaan sinuun yhteydessä
                         kolmen arkipäivän sisällä.</p>
+                </div>
+                <div className="back-btn">
+                    <Button href="/apua">Palaa takaisin</Button>
                 </div>
             </div>
         );
@@ -50,8 +53,12 @@ class Apua extends Component {
             <div className="feedback-text">
                 <div onClick={this.handleSubmit} className="helptext">
                     <Image className="feedback-text-image" src={errorLogo}/>
-                    <p>Lomakkeen lähettäminen epäonnistui</p>
-                    <p>Tarkista internet-yhteytesi ja yritä uudelleen</p>
+                    <p><b>Lomakkeen lähettäminen epäonnistui.</b></p>
+                    <p>Tarkista internet-yhteytesi ja yritä uudelleen.</p>
+
+                </div>
+                <div className="back-btn">
+                    <Button href="/apua">Palaa takaisin</Button>
                 </div>
             </div>
         );
@@ -77,7 +84,8 @@ class Apua extends Component {
 
         const env = {
             REACT_APP_EMAILJS_RECEIVER: process.env.REACT_APP_EMAILJS_RECEIVER,
-            REACT_APP_EMAILJS_TEMPLATEID: "template_lxucH6tK"
+            REACT_APP_EMAILJS_TEMPLATEID: "template_lxucH6tK",
+            //REACT_APP_EMAILJS_TEMPLATEID: "template_Sy2nlRNd", //Backup-tilin template ID
         };
 
         const {
@@ -140,7 +148,6 @@ class Apua extends Component {
                     this.setState({hideErrorText: false});
                     this.setState({hideForm: true});
                 }
-
             });
 
     }
