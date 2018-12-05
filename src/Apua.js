@@ -77,7 +77,8 @@ class Apua extends Component {
 
         const env = {
             REACT_APP_EMAILJS_RECEIVER: process.env.REACT_APP_EMAILJS_RECEIVER,
-            REACT_APP_EMAILJS_TEMPLATEID: "template_lxucH6tK"
+            REACT_APP_EMAILJS_TEMPLATEID: "template_lxucH6tK",
+            //REACT_APP_EMAILJS_TEMPLATEID: "template_Sy2nlRNd", //Backup-tilin template ID
         };
 
         const {
@@ -140,7 +141,6 @@ class Apua extends Component {
                     this.setState({hideErrorText: false});
                     this.setState({hideForm: true});
                 }
-
             });
 
     }
