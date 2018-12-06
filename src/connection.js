@@ -25,7 +25,15 @@ con.connect(function (error) {
         if (error) throw error;
     });
 
+    con.query('CREATE TABLE IF NOT EXISTS vanhemmuus (title VARCHAR(255), link VARCHAR(255), source VARCHAR(255), phase VARCHAR(255));', function (error, results) {
+        if (error) throw error;
+    });
+
     con.query('CREATE TABLE IF NOT EXISTS palveluhaku (title VARCHAR(255), link VARCHAR(255), source VARCHAR(255), aikuinen BOOLEAN DEFAULT 0, lapsitainuori BOOLEAN DEFAULT 0, asiantuntija BOOLEAN DEFAULT 0,  informationtype VARCHAR(255));', function (error, results) {
+        if (error) throw error;
+    });
+
+    con.query('CREATE TABLE IF NOT EXISTS lapsillejanuorille (title VARCHAR(255), link VARCHAR(255), source VARCHAR(255), aikuinen BOOLEAN DEFAULT 0, lapsitainuori BOOLEAN DEFAULT 0, asiantuntija BOOLEAN DEFAULT 0,  informationtype VARCHAR(255));', function (error, results) {
         if (error) throw error;
     });
 
@@ -107,6 +115,39 @@ application.get('/api/aikajana/olen_eronnut', function (req, res) {
     });
 
     con.query('SELECT * FROM mysql.eronnut;', function (error, results) {
+        if (error) throw error;
+        res.send(results)
+    });
+
+});
+application.get('/api/aikajana/vanhemmuus', function (req, res) {
+
+    con.query('TRUNCATE TABLE vanhemmuus', function (error, results) {
+        if (error) throw error;
+    });
+
+    con.query('LOAD DATA LOCAL INFILE \'csv/lapsen_tukeminen.csv\' INTO TABLE vanhemmuus FIELDS TERMINATED BY \',\' ENCLOSED BY \'"\' LINES TERMINATED BY \'\\n\' IGNORE 1 ROWS (@dummy, title, link, source, phase);', function (error, results) {
+        if (error) throw error;
+    });
+
+    con.query('SELECT * FROM mysql.vanhemmuus;', function (error, results) {
+        if (error) throw error;
+        res.send(results)
+    });
+
+});
+
+application.get('/api/aikajana/lapsillejanuorille', function (req, res) {
+
+    con.query('TRUNCATE TABLE lapsillejanuorille', function (error, results) {
+        if (error) throw error;
+    });
+
+    con.query('LOAD DATA LOCAL INFILE \'csv/suunnattu_nuorille.csv\' INTO TABLE lapsillejanuorille FIELDS TERMINATED BY \',\' ENCLOSED BY \'"\' LINES TERMINATED BY \'\\n\' IGNORE 1 ROWS (@dummy, title, link, source);', function (error, results) {
+        if (error) throw error;
+    });
+
+    con.query('SELECT * FROM mysql.lapsillejanuorille;', function (error, results) {
         if (error) throw error;
         res.send(results)
     });

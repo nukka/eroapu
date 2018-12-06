@@ -10,8 +10,12 @@ class Aikajana extends Component {
         this.state = {
             show1stContent: false,
             show2ndContent: false,
+            showParentingContent: false,
+            showParentsDivorcedContent: false,
             harkitsen: [],
-            eronnut: []
+            eronnut: [],
+            vanhemmuus: [],
+            lapsillejanuorille: []
         };
 
         fetch('http://localhost:3001/api/aikajana/harkitsen_eroa')
@@ -21,6 +25,14 @@ class Aikajana extends Component {
         fetch('http://localhost:3001/api/aikajana/olen_eronnut')
             .then(response => response.json())
             .then(eronnut => (this.setState({eronnut})));
+
+        fetch('http://localhost:3001/api/aikajana/vanhemmuus')
+            .then(response => response.json())
+            .then(vanhemmuus => (this.setState({vanhemmuus})));
+
+        fetch('http://localhost:3001/api/aikajana/lapsillejanuorille')
+            .then(response => response.json())
+            .then(lapsillejanuorille => (this.setState({lapsillejanuorille})));
     }
 
     toggleTimeLine1stElement() {
@@ -31,6 +43,16 @@ class Aikajana extends Component {
     toggleTimeLine2ndElement() {
         console.log("showcontent2: " + this.state.show2ndContent);
         this.setState({show2ndContent: !this.state.show2ndContent});
+    }
+
+    toggleTimeLineParentingElement() {
+        console.log("showParentingContent: " + this.state.showParentingContent);
+        this.setState({showParentingContent: !this.state.showParentingContent});
+    }
+
+    toggleTimeLineParentsDivorcedElement() {
+        console.log("ParentsDivorced: " + this.state.showParentsDivorcedContent);
+        this.setState({showParentsDivorcedContent: !this.state.showParentsDivorcedContent});
     }
 
     render() {
@@ -44,6 +66,24 @@ class Aikajana extends Component {
         });
 
         let consideringContent = this.state.eronnut.map(function (item) {
+            return (
+                <p>
+                    {item.title} <a href={item.link}> <br/> {item.source} </a>
+                </p>
+
+            );
+        });
+
+        let parentingContent = this.state.vanhemmuus.map(function (item) {
+            return (
+                <p>
+                    {item.title} <a href={item.link}> <br/> {item.source} </a>
+                </p>
+
+            );
+        });
+
+        let parentsDivorcedContent = this.state.lapsillejanuorille.map(function (item) {
             return (
                 <p>
                     {item.title} <a href={item.link}> <br/> {item.source} </a>
@@ -88,6 +128,34 @@ class Aikajana extends Component {
                                 </div>
                                 <span className="vertical-timeline-element-date"/>
                                 {this.state.show2ndContent && divorcedContent}</div>
+                        </div>
+                    </div>
+
+                    <div className="vertical-timeline-element--work vertical-timeline-element"
+                         onClick={() => this.toggleTimeLineParentingElement()}>
+                        <div>
+                            <span className="vertical-timeline-element-icon bounce-in"
+                                  style={{background: 'rgb(60,179,113)', color: 'rgb(255, 255, 255)'}}/>
+                            <div className="vertical-timeline-element-content bounce-in">
+                                <div><h3 className="vertical-timeline-element-title"> Apua vanhemmuuteen </h3><span
+                                    className="pull-right glyphicon glyphicon-glyphicon glyphicon-menu-down"/>
+                                </div>
+                                <span className="vertical-timeline-element-date"/>
+                                {this.state.showParentingContent && parentingContent}</div>
+                        </div>
+                    </div>
+
+                    <div className="vertical-timeline-element--work vertical-timeline-element"
+                         onClick={() => this.toggleTimeLineParentsDivorcedElement()}>
+                        <div>
+                            <span className="vertical-timeline-element-icon bounce-in"
+                                  style={{background: 'rgb(255,228,181)', color: 'rgb(255, 255, 255)'}}/>
+                            <div className="vertical-timeline-element-content bounce-in">
+                                <div><h3 className="vertical-timeline-element-title"> Vanhempani ovat eronneet </h3><span
+                                    className="pull-right glyphicon glyphicon-glyphicon glyphicon-menu-down"/>
+                                </div>
+                                <span className="vertical-timeline-element-date"/>
+                                {this.state.showParentsDivorcedContent && parentsDivorcedContent}</div>
                         </div>
                     </div>
 
