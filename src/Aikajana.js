@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
-import {VerticalTimeline, VerticalTimelineElement} from 'react-vertical-timeline-component';
+import {VerticalTimeline} from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
-import {Jumbotron, Glyphicon} from "react-bootstrap";
+import {Jumbotron} from "react-bootstrap";
 
 class Aikajana extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            show1stContent: false,
-            show2ndContent: false,
+            showConsideringContent: false,
+            showDivorcedContent: false,
             showParentingContent: false,
             showParentsDivorcedContent: false,
             harkitsen: [],
@@ -35,23 +35,19 @@ class Aikajana extends Component {
             .then(lapsillejanuorille => (this.setState({lapsillejanuorille})));
     }
 
-    toggleTimeLine1stElement() {
-        console.log("showcontent1: " + this.state.show1stContent);
-        this.setState({show1stContent: !this.state.show1stContent});
+    toggleTimeLineConsideringElement() {
+        this.setState({showConsideringContent: !this.state.showConsideringContent});
     }
 
-    toggleTimeLine2ndElement() {
-        console.log("showcontent2: " + this.state.show2ndContent);
-        this.setState({show2ndContent: !this.state.show2ndContent});
+    toggleTimeLineDivorcedElement() {
+        this.setState({showDivorcedContent: !this.state.showDivorcedContent});
     }
 
     toggleTimeLineParentingElement() {
-        console.log("showParentingContent: " + this.state.showParentingContent);
         this.setState({showParentingContent: !this.state.showParentingContent});
     }
 
     toggleTimeLineParentsDivorcedElement() {
-        console.log("ParentsDivorced: " + this.state.showParentsDivorcedContent);
         this.setState({showParentsDivorcedContent: !this.state.showParentsDivorcedContent});
     }
 
@@ -104,7 +100,7 @@ class Aikajana extends Component {
                 <VerticalTimeline>
 
                     <div className="vertical-timeline-element--work vertical-timeline-element"
-                         onClick={() => this.toggleTimeLine1stElement()}>
+                         onClick={() => this.toggleTimeLineConsideringElement()}>
                         <div>
                             <span className="vertical-timeline-element-icon bounce-in"
                                   style={{background: 'rgb(33, 150, 243)', color: 'rgb(255, 255, 255)'}}/>
@@ -113,12 +109,12 @@ class Aikajana extends Component {
                                     className="pull-right glyphicon glyphicon-glyphicon glyphicon-menu-down"/>
                                 </div>
                                 <span className="vertical-timeline-element-date"/>
-                                {this.state.show1stContent && consideringContent}</div>
+                                {this.state.showConsideringContent && consideringContent}</div>
                         </div>
                     </div>
 
                     <div className="vertical-timeline-element--work vertical-timeline-element"
-                         onClick={() => this.toggleTimeLine2ndElement()}>
+                         onClick={() => this.toggleTimeLineDivorcedElement()}>
                         <div>
                             <span className="vertical-timeline-element-icon bounce-in"
                                   style={{background: 'rgb(233, 30, 99)', color: 'rgb(255, 255, 255)'}}/>
@@ -127,7 +123,7 @@ class Aikajana extends Component {
                                     className="pull-right glyphicon glyphicon-glyphicon glyphicon-menu-down"/>
                                 </div>
                                 <span className="vertical-timeline-element-date"/>
-                                {this.state.show2ndContent && divorcedContent}</div>
+                                {this.state.showDivorcedContent && divorcedContent}</div>
                         </div>
                     </div>
 
