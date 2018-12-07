@@ -147,12 +147,16 @@ class Palveluhaku extends Component {
                 )
             });
 
+
             content.push(<Button onClick={this.handleCategoryClick.bind(this, title)}
                                  className={"dropdown-button"}> <p> {item} </p>
-                <div id={title} className="group-content" style={{display: 'none'}}>{list}</div>
                 <span
-                    className="pull-right glyphicon glyphicon-glyphicon glyphicon-menu-down"/> </Button>);
+                    className="pull-right glyphicon glyphicon-glyphicon glyphicon-menu-down"/> </Button>
+            );
+
+            content.push( <div id={title} className="border" style={{display: 'none'}}>{list}</div>);
         }
+
 
         if (content.length < 1) {
             content = <p> Tuloksia ei löytynyt. Kokeile uudestaan eri hakuehdoin. </p>
