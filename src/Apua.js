@@ -13,6 +13,7 @@ import {
 
 import successLogo from './images/success.png';
 import errorLogo from './images/error.png';
+import loaderGif from './images/loader.gif'
 
 class Apua extends Component {
 
@@ -65,8 +66,9 @@ class Apua extends Component {
         );
 
         this.loadingText = (
-            <div>
-                <p align= "center"> Ladataan...</p>
+            <div align="center">
+
+                <Image src={loaderGif}/>
             </div>
         );
     }
