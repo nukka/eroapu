@@ -30,6 +30,7 @@ class Apua extends Component {
             hideSuccessText: true,
             hideErrorText: true,
             hideForm: false,
+            hideLoadingText: true
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -63,6 +64,11 @@ class Apua extends Component {
             </div>
         );
 
+        this.loadingText = (
+            <div>
+                <p align= "center"> Ladataan...</p>
+            </div>
+        );
     }
 
 
@@ -81,6 +87,9 @@ class Apua extends Component {
     handleSubmit(event) {
 
         event.preventDefault();
+
+        this.setState({hideLoadingText: false});
+        console.log("hide loading: " + this.state.hideLoadingText);
 
         const env = {
             REACT_APP_EMAILJS_RECEIVER: process.env.REACT_APP_EMAILJS_RECEIVER,
@@ -239,7 +248,6 @@ class Apua extends Component {
 
     }
 
-
     render() {
 
         let contactField = null;
@@ -248,6 +256,7 @@ class Apua extends Component {
 
         let success = this.state.hideSuccessText ? {display: 'none'} : {};
         let error = this.state.hideErrorText ? {display: 'none'} : {};
+        let loading = this.state.hideLoadingText ? {display: 'none'} : {};
         let form = this.state.hideForm ? {display: 'none'} : {};
 
         const radioSelected = this.state.radioSelected;
@@ -324,6 +333,10 @@ class Apua extends Component {
 
                 <div className="sentError" style={error}>
                     {this.errorText}
+                </div>
+
+                <div className="loading" style={loading}>
+                    {this.loadingText}
                 </div>
 
             </div>
