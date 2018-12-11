@@ -54,7 +54,7 @@ class Aikajana extends Component {
     render() {
         let divorcedContent = this.state.harkitsen.map(function (item) {
             return (
-                <p>
+                <p className="timeline-link">
                     {item.title} <a href={item.link}>: {item.source} </a>
                 </p>
 
@@ -63,7 +63,7 @@ class Aikajana extends Component {
 
         let consideringContent = this.state.eronnut.map(function (item) {
             return (
-                <p>
+                <p className="timeline-link">
                     {item.title} <a href={item.link}>: {item.source} </a>
                 </p>
 
@@ -72,7 +72,7 @@ class Aikajana extends Component {
 
         let parentingContent = this.state.vanhemmuus.map(function (item) {
             return (
-                <p>
+                <p className="timeline-link">
                     {item.title} <a href={item.link}>: {item.source} </a>
                 </p>
 
@@ -81,7 +81,7 @@ class Aikajana extends Component {
 
         let parentsDivorcedContent = this.state.lapsillejanuorille.map(function (item) {
             return (
-                <p>
+                <p className="timeline-link">
                     {item.title} <a href={item.link}>: {item.source} </a>
                 </p>
 

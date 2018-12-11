@@ -101,6 +101,11 @@ ul {
     background-color: white;
 }
 
+p.timeline-link {
+    font-size: medium;
+    font-weight: normal;
+}
+
 .vertical-timeline::before {
     background: #d8d8d8;
 }
