@@ -33,8 +33,7 @@ class Palveluhaku extends Component {
 
         this.state = {
             isClicked: false,
-            results: [],
-            chosen: ""
+            results: []
         };
     }
 
@@ -46,18 +45,13 @@ class Palveluhaku extends Component {
     }
 
     handleCategoryClick(id) {
-        console.log("Button that was clicked: " + id);
-        this.setState({chosen: id});
-
         var element = document.getElementById(id);
         if (element.style.display === "none") {
             element.style.display = "block";
         } else {
             element.style.display = "none";
         }
-
     }
-
 
     componentWillMount = () => { // The functions of this class are borrowed from http://react.tips/checkboxes-in-react/
         this.selectedCheckboxes = new Set();
@@ -97,8 +91,6 @@ class Palveluhaku extends Component {
         console.log("qstring: " + querystring.stringify(chosen));
 
         var qs = querystring.stringify(chosen);
-
-        console.log("url: " + qs + ', linkki: http://localhost:3001/api/haku/' + qs);
 
         fetch('http://localhost:3001/api/haku/' + qs)
             .then(response => response.json())
@@ -142,7 +134,7 @@ class Palveluhaku extends Component {
             let list = grouped[item].map((i) => {
                 return (
                     <div>
-                        {i[0] + ": "} <a href={i[1]}> {i[2]} </a>
+                        {i[0] + ": "} <a href={i[1]} target="_blank" rel="noopener noreferrer"> {i[2]} </a>
                     </div>
                 )
             });
