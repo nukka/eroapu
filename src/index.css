@@ -230,3 +230,10 @@ p.timeline-link {
     font-size: small;
     font-weight: normal;
 }
+
+.border {
+    border: 1px solid #d8d8d8;
+    padding-bottom: 5px;
+
+
+}
