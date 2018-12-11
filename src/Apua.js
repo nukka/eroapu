@@ -147,6 +147,7 @@ class Apua extends Component {
                     this.setState({hideSuccessText: false});
                     this.setState({hideErrorText: true});
                     this.setState({hideForm: true});
+                    this.setState({hideLoadingText: true});
                 }
             })
 
@@ -156,6 +157,7 @@ class Apua extends Component {
                     this.setState({hideSuccessText: true});
                     this.setState({hideErrorText: false});
                     this.setState({hideForm: true});
+                    this.setState({hideLoadingText: true});
                 }
             });
 
