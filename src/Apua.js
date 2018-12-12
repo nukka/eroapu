@@ -329,6 +329,11 @@ class Apua extends Component {
 
 
                     </Form>
+                    
+                    <div className="loading" style={loading}>
+                        {this.loadingText}
+                    </div>
+
                     <p className="privacy-text"> Lomakkeella jättämäsi tietoja käsittelevät ainoastaan Oulun kaupungin sosiaali- ja terveystoimen sosiaalialan ammattilaiset.
                         Täyttämäsi tiedot poistuvat automaattisesti määrääajan kuluttua. Tietojasi ei luovuteta kolmansille osapuolille. </p>
 
@@ -340,10 +345,6 @@ class Apua extends Component {
 
                 <div className="sentError" style={error}>
                     {this.errorText}
-                </div>
-
-                <div className="loading" style={loading}>
-                    {this.loadingText}
                 </div>
 
             </div>
