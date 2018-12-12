@@ -182,7 +182,7 @@ class Apua extends Component {
                 this.setState({showphonewarning: false});
                 this.setState({disableButton: false});
             } else {
-                if (value !== '' || value.length !== 0) {
+                if ((value !== '' || value.length !== 0) || value.length === 0) {
                     this.setState({showphonewarning: true});
                     this.setState({disableButton: true});
                 } else {
@@ -199,7 +199,7 @@ class Apua extends Component {
                 this.setState({showemailwarning: false});
                 this.setState({disableButton: false});
             } else {
-                if (value !== '' || value.length !== 0) {
+                if ((value !== '' || value.length !== 0) || value.length === 0) {
                     this.setState({showemailwarning: true});
                     this.setState({disableButton: true});
                 } else {
