@@ -141,12 +141,12 @@ class Palveluhaku extends Component {
 
 
             content.push(<Button onClick={this.handleCategoryClick.bind(this, title)}
-                                 className={"dropdown-button"}> <p> {item} </p>
+                                 className={"dropdown-button"}><p> {item} </p>
                 <span
                     className="pull-right glyphicon glyphicon-glyphicon glyphicon-menu-down"/> </Button>
             );
 
-            content.push( <div id={title} className="border" style={{display: 'none'}}>{list}</div>);
+            content.push(<div id={title} className="border" style={{display: 'none'}}>{list}</div>);
         }
 
 
@@ -167,7 +167,6 @@ class Palveluhaku extends Component {
                         <p className="helptext">Palvelu</p>
                         <form onSubmit={this.handleFormSubmit}>
                             {this.createCheckboxes()}
-                            <button className="btn btn-default" type="submit" onClick={this.handleClick}>Hae</button>
                         </form>
                     </Col>
                     <Col md={2}>
@@ -175,6 +174,12 @@ class Palveluhaku extends Component {
                         <form onSubmit={this.handleFormSubmit}>
                             {this.createCheckboxes2()}
                         </form>
+                    </Col>
+                </Row>
+                <Row className="show-grid">
+                    <Col md={4}> </Col>
+                    <Col md={8}>
+                    <button className="btn btn-default" type="submit" onClick={this.handleClick}>Hae</button>
                     </Col>
                 </Row>
                 <div className="spacer">
