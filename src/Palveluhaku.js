@@ -188,7 +188,7 @@ class Palveluhaku extends Component {
                     <Row className="show-grid">
                         <Col xsOffset={4}>
                             {this.state.isClicked ? <div className="dropdown-table">
-                                <ButtonGroup vertical block> {content} </ButtonGroup></div> : null}
+                                <ButtonGroup style={{width: '100%'}} vertical block> {content} </ButtonGroup></div> : null}
 
                         </Col>
                     </Row>
