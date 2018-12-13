@@ -179,7 +179,9 @@ class Palveluhaku extends Component {
                 <Row className="show-grid">
                     <Col md={4}> </Col>
                     <Col md={8}>
-                    <button className="btn btn-default" type="submit" onClick={this.handleClick}>Hae</button>
+                        <form onSubmit={this.handleFormSubmit}>
+                            <button className="btn btn-default" type="submit" onClick={this.handleClick}>Hae</button>
+                        </form>
                     </Col>
                 </Row>
                 <div className="spacer">
