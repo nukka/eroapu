@@ -132,9 +132,17 @@ class Apua extends Component {
 
         if (from_email === '') {
             from_email = "Ei annettu";
-        } else if (from_phone === '') {
+        }
+        if (from_phone === '') {
             from_phone = "Ei annettu"
         }
+        if (message_html === '') {
+            message_html = "Ei annettu"
+        }
+        if (from_name === '') {
+            from_name = "Ei annettu"
+        }
+
 
         window.emailjs
             .send('gmail', templateId, {
@@ -181,6 +189,7 @@ class Apua extends Component {
                 this.setState({phonenumber: value});
                 this.setState({showphonewarning: false});
                 this.setState({disableButton: false});
+
             } else {
                 if (value !== '' || value.length !== 0) {
                     this.setState({showphonewarning: true});
