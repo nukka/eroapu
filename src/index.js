@@ -21,7 +21,6 @@ import {
 // Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
-
 function Etusivu() {
     return (
         <App/>
@@ -108,7 +107,10 @@ ReactDOM.render((
                         <Col md={3}>
 
                             <p className="footer-title"> Eroportaali </p>
-                            Eroportaalista löydät koottuna eroon liittyvää tietoa. Aikajanalla näet eron eri vaiheet. Palveluhaun avulla voit hakea tietoa eri kohderyhmille useista eri aihepiireistä. Tapahtumakalenterista näet eroon liittyviä tapahtumia. Tarjoamme myös apua sitä tarvitseville.
+                            Eroportaalista löydät koottuna eroon liittyvää tietoa. Aikajanalla näet eron eri vaiheet.
+                            Palveluhaun avulla voit hakea tietoa eri kohderyhmille useista eri aihepiireistä.
+                            Tapahtumakalenterista näet eroon liittyviä tapahtumia. Tarjoamme myös apua sitä
+                            tarvitseville.
 
                         </Col>
                         <Col md={6} className="footer-middle">

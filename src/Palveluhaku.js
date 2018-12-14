@@ -37,7 +37,7 @@ class Palveluhaku extends Component {
         };
     }
 
-    handleClick(e) {
+    handleClick() {
         this.setState({
             isClicked: true,
         });
@@ -114,7 +114,6 @@ class Palveluhaku extends Component {
     );
 
     render() {
-
         let grouped = this.state.results.reduce((group, {title, link, source, informationtype}) => {
             let items = [];
             items[0] = title;
@@ -139,7 +138,6 @@ class Palveluhaku extends Component {
                 )
             });
 
-
             content.push(<Button onClick={this.handleCategoryClick.bind(this, title)}
                                  className={"dropdown-button"}><p> {item} </p>
                 <span
@@ -148,7 +146,6 @@ class Palveluhaku extends Component {
 
             content.push(<div id={title} className="border" style={{display: 'none'}}>{list}</div>);
         }
-
 
         if (content.length < 1) {
             content = <p> Tuloksia ei löytynyt. Kokeile uudestaan eri hakuehdoin. </p>
@@ -188,7 +185,8 @@ class Palveluhaku extends Component {
                     <Row className="show-grid">
                         <Col xsOffset={4}>
                             {this.state.isClicked ? <div className="dropdown-table">
-                                <ButtonGroup style={{width: '100%'}} vertical block> {content} </ButtonGroup></div> : null}
+                                <ButtonGroup style={{width: '100%'}} vertical block> {content} </ButtonGroup>
+                            </div> : null}
 
                         </Col>
                     </Row>

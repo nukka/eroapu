@@ -147,8 +147,9 @@ class Aikajana extends Component {
                             <span className="vertical-timeline-element-icon bounce-in"
                                   style={{background: 'rgb(255,228,181)', color: 'rgb(255, 255, 255)'}}/>
                             <div className="vertical-timeline-element-content bounce-in">
-                                <div><h3 className="vertical-timeline-element-title"> Vanhempani ovat eronneet </h3><span
-                                    className="pull-right glyphicon glyphicon-glyphicon glyphicon-menu-down"/>
+                                <div><h3 className="vertical-timeline-element-title"> Vanhempani ovat eronneet </h3>
+                                    <span
+                                        className="pull-right glyphicon glyphicon-glyphicon glyphicon-menu-down"/>
                                 </div>
                                 <span className="vertical-timeline-element-date"/>
                                 {this.state.showParentsDivorcedContent && parentsDivorcedContent}</div>

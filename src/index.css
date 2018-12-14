@@ -41,8 +41,7 @@ ul {
 
 .footer-title {
     font-size: x-large;
-    padding: 10px;
-    padding-top: 50px;
+    padding: 50px 10px 10px;
 }
 
 @media only screen and (min-width: 1170px) {
@@ -188,16 +187,16 @@ p.timeline-link {
     color: white;
 }
 
-.back-btn{
+.back-btn {
     padding-top: 3%;
     padding-bottom: 8%;
 }
 
-.feedback-text{
+.feedback-text {
     text-align: center;
 }
 
-.feedback-text-image{
+.feedback-text-image {
     max-height: 10%;
     max-width: 10%;
     padding-top: 5%;
@@ -234,8 +233,6 @@ p.timeline-link {
 .border {
     border: 1px solid #d8d8d8;
     padding-bottom: 5px;
-
-
 }
 
 .privacy-text {

@@ -14,8 +14,6 @@ class Tulokset extends Component {
                     <DropdownTableButton/>
                     <DropdownTableButton/>
                 </div>
-
-
             </div>
         );
     }

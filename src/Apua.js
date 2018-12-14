@@ -114,7 +114,6 @@ class Apua extends Component {
         this.setState({
             formSubmitted: true,
         });
-
     }
 
 
@@ -123,7 +122,6 @@ class Apua extends Component {
         this.handleNameInput = this.handleNameInput.bind(this);
         this.handleTextInput = this.handleTextInput.bind(this);
         this.handleUserInput = this.handleUserInput.bind(this);
-
 
         from_name = this.state.name;
         message_html = this.state.formtext;
@@ -142,7 +140,6 @@ class Apua extends Component {
         if (from_name === '') {
             from_name = "Ei annettu"
         }
-
 
         window.emailjs
             .send('gmail', templateId, {
@@ -170,7 +167,6 @@ class Apua extends Component {
                     this.setState({hideLoadingText: true});
                 }
             });
-
     }
 
 
@@ -216,53 +212,41 @@ class Apua extends Component {
                     this.setState({disableButton: false});
                 }
             }
-
         }
-
     }
 
     handleTextInput(e) {
         this.setState({formtext: e.target.value});
-        console.log("teksti: " + e.target.value);
-
-
+        //console.log("teksti: " + e.target.value);
     }
 
     handleNameInput(e) {
         this.setState({name: e.target.value});
-        console.log("nimi: " + e.target.value);
-
-
+        //console.log("nimi: " + e.target.value);
     }
 
     phoneNumberAlert() {
-
         if (this.state.showphonewarning === true) {
             return <Alert bsStyle="danger"> Laita puhelinnumeroon vain numeroita. <br/> Puhelinnumeron pituus voi olla
                 vain maksimissaan 13 merkkiä. </Alert>;
         } else {
             return '';
         }
-
     }
 
     emailAlert() {
-
         if (this.state.showemailwarning === true) {
             return <Alert bsStyle="danger"> Invalidi sähköposti. </Alert>;
         } else {
             return '';
         }
-
     }
 
     handleRadioClick(e) {
         this.setState({radioSelected: e});
-
     }
 
     render() {
-
         let contactField = null;
         let phoneWarningTextField = this.phoneNumberAlert();
         let emailWarningTextField = this.emailAlert();
@@ -286,7 +270,6 @@ class Apua extends Component {
         }
 
         return (
-
             <div className="page-content">
 
                 <Jumbotron className="otsikko" style={form}>
@@ -336,15 +319,16 @@ class Apua extends Component {
                         <Button type="submit" value="Submit" onClick={this.handleSubmit}
                                 disabled={this.state.disableButton} className="btn default"> Lähetä </Button>
 
-
                     </Form>
-                    
+
                     <div className="loading" style={loading}>
                         {this.loadingText}
                     </div>
 
-                    <p className="privacy-text"> Lomakkeella jättämäsi tietoja käsittelevät ainoastaan Oulun kaupungin sosiaali- ja terveystoimen sosiaalialan ammattilaiset.
-                        Täyttämäsi tiedot poistuvat automaattisesti määrääajan kuluttua. Tietojasi ei luovuteta kolmansille osapuolille. </p>
+                    <p className="privacy-text"> Lomakkeella jättämäsi tietoja käsittelevät ainoastaan Oulun kaupungin
+                        sosiaali- ja terveystoimen sosiaalialan ammattilaiset.
+                        Täyttämäsi tiedot poistuvat automaattisesti määrääajan kuluttua. Tietojasi ei luovuteta
+                        kolmansille osapuolille. </p>
 
                 </div>
 
@@ -357,8 +341,6 @@ class Apua extends Component {
                 </div>
 
             </div>
-
-
         );
     }
 }
