@@ -191,7 +191,7 @@ class Apua extends Component {
                 this.setState({disableButton: false});
 
             } else {
-                if (value !== '' || value.length !== 0) {
+                if ((value !== '' || value.length !== 0) || value.length === 0) {
                     this.setState({showphonewarning: true});
                     this.setState({disableButton: true});
                 } else {
@@ -208,7 +208,7 @@ class Apua extends Component {
                 this.setState({showemailwarning: false});
                 this.setState({disableButton: false});
             } else {
-                if (value !== '' || value.length !== 0) {
+                if ((value !== '' || value.length !== 0) || value.length === 0) {
                     this.setState({showemailwarning: true});
                     this.setState({disableButton: true});
                 } else {
@@ -276,11 +276,11 @@ class Apua extends Component {
         if (radioSelected === 'phone') {
             contactField =
                 <FormControl className="form-field" onChange={(e) => this.handleUserInput(e)}
-                             placeholder="Kirjoita puhelinnumero..."/>;
+                             placeholder="Kirjoita puhelinnumero*"/>;
         } else if (radioSelected === 'email') {
             contactField =
                 <FormControl className="form-field" onChange={(e) => this.handleUserInput(e)}
-                             placeholder="Kirjoita sähköposti..."/>;
+                             placeholder="Kirjoita sähköposti*"/>;
         } else {
             contactField = '';
         }
@@ -317,7 +317,7 @@ class Apua extends Component {
                         {emailWarningTextField}
 
                         <FormGroup controlId="formName">
-                            <ControlLabel>Nimi tai nimimerkki</ControlLabel>
+                            <ControlLabel>Nimi tai nimimerkki*</ControlLabel>
                             <FormControl
                                 type="text"
                                 placeholder="Syötä nimesi tai nimimerkkisi"
@@ -330,7 +330,7 @@ class Apua extends Component {
                             <ControlLabel className="form-field">Miten voimme auttaa? </ControlLabel>
                             <FormControl className="form-field text-area" componentClass="textarea"
                                          onChange={(e) => this.handleTextInput(e)}
-                                         placeholder="Kirjoita tähän, millaista apua tarvitset"/>
+                                         placeholder="Tähän voit kirjoittaa tilanteestasi."/>
                         </FormGroup>
 
                         <Button type="submit" value="Submit" onClick={this.handleSubmit}
@@ -338,6 +338,14 @@ class Apua extends Component {
 
 
                     </Form>
+                    
+                    <div className="loading" style={loading}>
+                        {this.loadingText}
+                    </div>
+
+                    <p className="privacy-text"> Lomakkeella jättämäsi tietoja käsittelevät ainoastaan Oulun kaupungin sosiaali- ja terveystoimen sosiaalialan ammattilaiset.
+                        Täyttämäsi tiedot poistuvat automaattisesti määrääajan kuluttua. Tietojasi ei luovuteta kolmansille osapuolille. </p>
+
                 </div>
 
                 <div className="sentSuccess" style={success}>
@@ -346,10 +354,6 @@ class Apua extends Component {
 
                 <div className="sentError" style={error}>
                     {this.errorText}
-                </div>
-
-                <div className="loading" style={loading}>
-                    {this.loadingText}
                 </div>
 
             </div>

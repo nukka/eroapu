@@ -179,12 +179,27 @@ application.get('/api/haku/:id', function (req, res) {
     let topics = query["topic"];
     let targetgroups = query["target"];
 
-    console.log("target " + targetgroups);
-    console.log("topics: " + topics);
-    console.log("topics[0]: " + topics[0]);
-    console.log("topics[0] length: " + topics[0].length);
+    if (topics == null) {
+        console.log("no topics were selected");
 
-    if (targetgroups != null && targetgroups[0].length === 1) { //1 target selected
+        if (targetgroups[0].length > 1) {
+
+            con.query('INSERT INTO palveluhakutulokset SELECT * FROM mysql.palveluhaku;', function (error, results) {
+                if (error) throw error;
+            });
+
+        } else if (targetgroups === "Aikuinen") {
+
+            con.query('INSERT INTO palveluhakutulokset SELECT * FROM mysql.palveluhaku WHERE aikuinen = 1;', function (error, results) {
+                if (error) throw error;
+            });
+
+        } else {
+            con.query('INSERT INTO palveluhakutulokset SELECT * FROM mysql.palveluhaku WHERE lapsitainuori = 1;', function (error, results) {
+                if (error) throw error;
+            });
+        }
+    } else if (targetgroups != null && targetgroups[0].length === 1) { //1 target selected
 
         console.log("targetgroups[0].length: " + targetgroups[0].length);
         console.log("targetgroups[0]: " + targetgroups[0]);
@@ -210,17 +225,17 @@ application.get('/api/haku/:id', function (req, res) {
         } else {
             console.log("one target has been selected and just 1 topic is selected");
 
-                console.log("topic: " + topics);
-                if (targetgroups === "Aikuinen") {
-                    con.query('INSERT INTO palveluhakutulokset SELECT * FROM mysql.palveluhaku WHERE informationtype = ? AND aikuinen = 1', topics, function (error, rows) {
-                        if (error) throw error;
-                    });
+            console.log("topic: " + topics);
+            if (targetgroups === "Aikuinen") {
+                con.query('INSERT INTO palveluhakutulokset SELECT * FROM mysql.palveluhaku WHERE informationtype = ? AND aikuinen = 1', topics, function (error, rows) {
+                    if (error) throw error;
+                });
 
-                } else {
-                    con.query('INSERT INTO palveluhakutulokset SELECT * FROM mysql.palveluhaku WHERE informationtype = ? AND lapsitainuori = 1', topics, function (error, rows) {
-                        if (error) throw error;
-                    });
-                }
+            } else {
+                con.query('INSERT INTO palveluhakutulokset SELECT * FROM mysql.palveluhaku WHERE informationtype = ? AND lapsitainuori = 1', topics, function (error, rows) {
+                    if (error) throw error;
+                });
+            }
         }
     } else { //when all target groups are chosen
 

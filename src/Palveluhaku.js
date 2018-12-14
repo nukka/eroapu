@@ -33,8 +33,7 @@ class Palveluhaku extends Component {
 
         this.state = {
             isClicked: false,
-            results: [],
-            chosen: ""
+            results: []
         };
     }
 
@@ -46,18 +45,13 @@ class Palveluhaku extends Component {
     }
 
     handleCategoryClick(id) {
-        console.log("Button that was clicked: " + id);
-        this.setState({chosen: id});
-
         var element = document.getElementById(id);
         if (element.style.display === "none") {
             element.style.display = "block";
         } else {
             element.style.display = "none";
         }
-
     }
-
 
     componentWillMount = () => { // The functions of this class are borrowed from http://react.tips/checkboxes-in-react/
         this.selectedCheckboxes = new Set();
@@ -97,8 +91,6 @@ class Palveluhaku extends Component {
         console.log("qstring: " + querystring.stringify(chosen));
 
         var qs = querystring.stringify(chosen);
-
-        console.log("url: " + qs + ', linkki: http://localhost:3001/api/haku/' + qs);
 
         fetch('http://localhost:3001/api/haku/' + qs)
             .then(response => response.json())
@@ -142,19 +134,19 @@ class Palveluhaku extends Component {
             let list = grouped[item].map((i) => {
                 return (
                     <div>
-                        {i[0] + ": "} <a href={i[1]}> {i[2]} </a>
+                        {i[0] + ": "} <a href={i[1]} target="_blank" rel="noopener noreferrer"> {i[2]} </a>
                     </div>
                 )
             });
 
 
             content.push(<Button onClick={this.handleCategoryClick.bind(this, title)}
-                                 className={"dropdown-button"}> <p> {item} </p>
+                                 className={"dropdown-button"}><p> {item} </p>
                 <span
                     className="pull-right glyphicon glyphicon-glyphicon glyphicon-menu-down"/> </Button>
             );
 
-            content.push( <div id={title} className="border" style={{display: 'none'}}>{list}</div>);
+            content.push(<div id={title} className="border" style={{display: 'none'}}>{list}</div>);
         }
 
 
@@ -175,7 +167,6 @@ class Palveluhaku extends Component {
                         <p className="helptext">Palvelu</p>
                         <form onSubmit={this.handleFormSubmit}>
                             {this.createCheckboxes()}
-                            <button className="btn btn-default" type="submit" onClick={this.handleClick}>Hae</button>
                         </form>
                     </Col>
                     <Col md={2}>
@@ -185,11 +176,19 @@ class Palveluhaku extends Component {
                         </form>
                     </Col>
                 </Row>
+                <Row className="show-grid">
+                    <Col md={4}> </Col>
+                    <Col md={8}>
+                        <form onSubmit={this.handleFormSubmit}>
+                            <button className="btn btn-default" type="submit" onClick={this.handleClick}>Hae</button>
+                        </form>
+                    </Col>
+                </Row>
                 <div className="spacer">
                     <Row className="show-grid">
                         <Col xsOffset={4}>
                             {this.state.isClicked ? <div className="dropdown-table">
-                                <ButtonGroup vertical block> {content} </ButtonGroup></div> : null}
+                                <ButtonGroup style={{width: '100%'}} vertical block> {content} </ButtonGroup></div> : null}
 
                         </Col>
                     </Row>
