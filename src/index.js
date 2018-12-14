@@ -5,7 +5,6 @@ import Apua from './Apua';
 import Aikajana from './Aikajana';
 import Palveluhaku from './Palveluhaku';
 import Kalenteri from './Kalenteri';
-import Tulokset from './Tulokset';
 import logo from './images/Logo.png';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
@@ -49,12 +48,6 @@ function Tapahtumakalenteri() {
     return (
         <Kalenteri/>
     );
-
-    function Tulokset() {
-        return (
-            <Tulokset/>
-        );
-    }
 }
 
 ReactDOM.render((
@@ -98,7 +91,6 @@ ReactDOM.render((
                     <Route path="/apua" component={Hatanappi}/>
                     <Route path="/aikajana" component={Jana}/>
                     <Route path="/kalenteri" component={Tapahtumakalenteri}/>
-                    <Route path="/tulokset" component={Tulokset}/>
                 </Switch>
             </div>
             <div className="page-footer">
